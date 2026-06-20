@@ -1,20 +1,26 @@
 from projects.models import Project
 import logging
 from datetime import datetime
-from sqlalchemy.orm import query
 from projects.db import with_session
 
 @with_session
 def add_project(Session, name: str, url: str, description: str = None) -> int:
+    """Adds a new project with all of the given parameters
+
+    Args:
+        Session (_type_): The SQL Alchemy session
+        name (str): The name of the new project
+        url (str): The url to access the project (if web-based)
+        description (str, optional): _description_. Defaults to None.
+
+    Returns:
+        int: _description_
+    """
     created = datetime.now()
 
     new_project = Project(name = name, url = url, description = description, datetime_created = created, active = True)
     logging.info(f"{new_project = }")
     Session.add(new_project)
-
-    Session.flush()
-
-    return new_project.id
 
 @with_session
 def edit_project(Session, project_id: int, name: str = None, url: str = None, description: str = None):
@@ -32,16 +38,45 @@ def edit_project(Session, project_id: int, name: str = None, url: str = None, de
 
 @with_session
 def deactivate_project(Session, project_id: int):
-    pass
+    project: Project = Session.get(Project, project_id)
+
+    if project == None:
+        raise ValueError(f"No project with given ID exists. {project_id = }")
+
+    logging.info(f"Project To Edit: {project}")
+
+    project.active = False
 
 @with_session
 def activate_project(Session, project_id: int):
+    project: Project = Session.get(Project, project_id)
+
+    if project == None:
+        raise ValueError(f"No project with given ID exists. {project_id = }")
+
+    logging.info(f"Project To Edit: {project}")
+
+    project.active = True
+
+@with_session
+def get_active_projects_overview(Session) -> list[dict]:
+    projects: list[Project] = Session.query(Project).filter(Project.active == True).order_by(Project.datetime_created).all() # ? Make this order by change with user choice
+
+    project_dicts = []
+
+    for project in projects:
+        project_dicts.append({
+            "id": project.id,
+            "name": project.name,
+            "url": project.url
+        })
+
+    return project_dicts
+
+@with_session
+def get_project_details(Session, project_id: int) -> dict:
     pass
 
 @with_session
-def get_projects_overview(Session) -> list[dict]:
-    pass
-
-@with_session
-def get_project_details(Session) -> dict:
+def get_inactive_projects(Session) -> list[dict]:
     pass

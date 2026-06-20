@@ -9,12 +9,14 @@ class Project(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True, nullable=False)
     name: Mapped[str] = mapped_column(nullable=False)
-    url: Mapped[str] = mapped_column(nullable=False)
+    url: Mapped[str] = mapped_column(nullable=True)
     description: Mapped[str] = mapped_column(nullable=True)
     datetime_created: Mapped[datetime] = mapped_column(nullable=False)
     active: Mapped[bool] = mapped_column(nullable=False)
+    # TODO: Add AI usage grade
+    # TODO: Add GitHub link
     # ? favorite: Mapped[bool] = mapped_column(nullable=False)
     # ? datetime_accessed: Mapped[datetime] = mapped_column(nullable=True)
 
     def __repr__(self):
-        return f"<{self.id = }, {self.name = }, {self.url = }, {self.description = }, {self.datetime_created = }>"
+        return f"<{self.id = }, {self.name = }, {self.url = }, {self.description = }, {self.datetime_created = }, {self.active = }>"
