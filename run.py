@@ -7,4 +7,4 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 DEBUGGING_STATE = bool(os.getenv("DEBUGGING"))
 
 if __name__ == "__main__":
-    print("hello")
+    print("hello world")
