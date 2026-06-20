@@ -13,7 +13,7 @@ class Project(Base):
     description: Mapped[str] = mapped_column(nullable=True)
     datetime_created: Mapped[datetime] = mapped_column(nullable=False)
     active: Mapped[bool] = mapped_column(nullable=False)
-    # TODO: Add AI usage grade
+    # TODO: Add AI collaboration grade
     # TODO: Add GitHub link
     # ? favorite: Mapped[bool] = mapped_column(nullable=False)
     # ? datetime_accessed: Mapped[datetime] = mapped_column(nullable=True)

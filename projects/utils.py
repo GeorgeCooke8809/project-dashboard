@@ -3,6 +3,8 @@ import logging
 from datetime import datetime
 from projects.db import with_session
 
+# TODO: Add tests for if no project exists
+
 @with_session
 def add_project(Session, name: str, url: str, description: str = None) -> int:
     """Adds a new project with all of the given parameters
@@ -43,7 +45,7 @@ def deactivate_project(Session, project_id: int):
     if project == None:
         raise ValueError(f"No project with given ID exists. {project_id = }")
 
-    logging.info(f"Project To Edit: {project}")
+    logging.info(f"Project To Deactivate: {project}")
 
     project.active = False
 
@@ -54,7 +56,7 @@ def activate_project(Session, project_id: int):
     if project == None:
         raise ValueError(f"No project with given ID exists. {project_id = }")
 
-    logging.info(f"Project To Edit: {project}")
+    logging.info(f"Project To Activate: {project}")
 
     project.active = True
 
@@ -75,7 +77,20 @@ def get_active_projects_overview(Session) -> list[dict]:
 
 @with_session
 def get_project_details(Session, project_id: int) -> dict:
-    pass
+    project: Project = Session.get(Project, project_id)
+
+    if project == None:
+        raise ValueError(f"No project with given ID exists. {project_id = }")
+
+    logging.info(f"Project To Display: {project}")
+
+    return {
+        "id": project.id,
+        "name": project.name,
+        "url": project.url,
+        "description": project.description,
+        "created": project.datetime_created
+    }
 
 @with_session
 def get_inactive_projects(Session) -> list[dict]:
