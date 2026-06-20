@@ -12,6 +12,7 @@ class Project(Base):
     url: Mapped[str] = mapped_column(nullable=False)
     description: Mapped[str] = mapped_column(nullable=True)
     datetime_created: Mapped[datetime] = mapped_column(nullable=False)
+    active: Mapped[bool] = mapped_column(nullable=False)
     # ? favorite: Mapped[bool] = mapped_column(nullable=False)
     # ? datetime_accessed: Mapped[datetime] = mapped_column(nullable=True)
 

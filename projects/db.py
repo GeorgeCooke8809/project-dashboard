@@ -13,8 +13,9 @@ def with_session(func):
     def wrap(*args, **kwargs):
         session = Session()
         try:
-            func(session, *args, **kwargs)
+            result = func(session, *args, **kwargs)
             session.commit()
+            return result
         except:
             session.rollback()
         finally:
