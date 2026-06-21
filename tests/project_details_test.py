@@ -21,3 +21,7 @@ class TestProjectDetails:
         assert details["name"] == "Project 1"
         assert details["url"] == "URL 1"
         assert details["description"] == None
+
+    def test_no_project_exists(self):
+        with pytest.raises(ValueError):
+            projects.utils.get_project_details(1)

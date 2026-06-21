@@ -45,3 +45,7 @@ class TestEditProject:
         assert project.name == "new name"
         assert project.url == "New URL"
         assert project.description == "new description"
+
+    def test_no_project_exists(self):
+        with pytest.raises(ValueError):
+            projects.utils.edit_project(1, name="Name")

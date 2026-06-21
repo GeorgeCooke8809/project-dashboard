@@ -18,6 +18,7 @@ def with_session(func):
             return result
         except:
             session.rollback()
+            raise # Re-raises the exception for further use
         finally:
             session.close()
     return wrap
