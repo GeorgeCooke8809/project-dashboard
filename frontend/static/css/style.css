@@ -15,7 +15,7 @@ body {
     font-family: var(--serif-font);
     background-color: var(--primary-bg-colour);
     width: 80vw;
-    margin: auto;
+    margin: 30px auto;
     display: flex;
     flex-direction: column;
 
@@ -111,4 +111,52 @@ hr {
 
 .project-link:hover {
     text-decoration: underline;
+}
+
+.inline {
+    display: flex;
+    flex-direction: row;
+}
+
+#details-info-panel {
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    width: 25%;
+    height: 100%;
+    min-height: 94vh;
+    background-color: var(--card-bg-colour);
+    border-color: var(--contrast-colour);
+    border-width: 0.1rem;
+    border-style: solid;
+
+    align-items: center;
+
+    padding: 10px;
+    margin-right: 20px;
+}
+
+#details-info-panel h4 {
+    color: var(--text-colour);
+    font-family: var(--serif-font);
+    font-weight: bolder;
+    font-size: 25px;
+    text-decoration: none;
+    margin: 10px 0px;
+}
+
+#details-info-panel a {
+    color: var(--text-colour);
+    font-family: var(--sans-serif-font);
+    font-weight: bold;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+#details-info-panel a:hover {
+    text-decoration: underline;
+}
+
+#details-description {
+    font-family: var(--sans-serif-font);
 }

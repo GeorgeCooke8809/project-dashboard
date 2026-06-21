@@ -95,7 +95,8 @@ def get_project_details(Session, project_id: int) -> dict:
         "name": project.name,
         "url": project.url,
         "description": project.description,
-        "created": project.datetime_created
+        "created": project.datetime_created,
+        "created_readable": project.datetime_created.strftime("%d/%m/%Y")
     }
 
 @with_session
