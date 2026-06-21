@@ -13,7 +13,7 @@ def check_project_exists(Session, project_id: int) -> bool:
     return False
 
 @with_session
-def add_project(Session, name: str, url: str, description: str = None) -> int:
+def add_project(Session, name: str, url: str, description: str = None, created: datetime = datetime.now()) -> int:
     """Adds a new project with all of the given parameters
 
     Args:
@@ -25,7 +25,6 @@ def add_project(Session, name: str, url: str, description: str = None) -> int:
     Returns:
         int: _description_
     """
-    created = datetime.now()
 
     new_project = Project(name = name, url = url, description = description, datetime_created = created, active = True)
     logging.info(f"{new_project = }")

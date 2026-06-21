@@ -9,3 +9,5 @@
 ```uv run alembic upgrade head```
 
 ```uv run run.py```
+
+Default admin password: adminpassword123*
