@@ -3,7 +3,14 @@ import logging
 from datetime import datetime
 from projects.db import with_session
 
-# TODO: Add tests for if no project exists
+@with_session
+def check_project_exists(Session, project_id: int) -> bool:
+    project: Project = Session.get(Project, project_id)
+
+    if project != None:
+        return True
+    
+    return False
 
 @with_session
 def add_project(Session, name: str, url: str, description: str = None) -> int:
@@ -94,4 +101,15 @@ def get_project_details(Session, project_id: int) -> dict:
 
 @with_session
 def get_inactive_projects(Session) -> list[dict]:
-    pass
+    projects: list[Project] = Session.get(Project).filter(Project.active == False).order_by(Project.datetime_created).all()
+
+    project_dicts = []
+
+    for project in projects:
+        project_dicts.append({
+            "id": project.id,
+            "name": project.name,
+            "url": project.url
+        })
+
+    return project_dicts
