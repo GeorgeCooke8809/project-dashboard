@@ -1,6 +1,7 @@
 *.db
 *.env
 *.log
+*.pyc
 
 /__pycache__
 */__pycache__
