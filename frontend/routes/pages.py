@@ -39,13 +39,14 @@ def details(id: int):
                            details = details)
 
 @pages.route("/login", methods = ["GET", "POST"])
-def login():
+def login(): # TODO: Split some off to api file
     if request.method == "POST":
         details = request.get_json()
         username = details["username"]
         password = details["password"]
 
         if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
+            session.permanent = True
             session["admin"] = True
 
             return jsonify({
@@ -58,14 +59,28 @@ def login():
                 "message": "Those login details are not valid."
             })
     else:
-        return render_template("login.html")
+        print(f"{session = }")
+        if "admin" not in session:
+            return render_template("login.html")
+        
+        return redirect("/admin-dashboard",
+                        #admin = session["admin"] # TODO: Add logout in base based on admin flag here
+                        )
     
 
 # ==================== Admin Pages ====================
 
 @pages.route("/admin-dashboard", methods = ["GET"])
 def admin_dashboard():
-    if "admin" not in session:
-        return redirect(url_for("login"))
+    if "admin" not in session or session["admin"] != True:
+        return redirect(url_for("pages.login"))
     
-    return render_template("admin-dashboard.html")
+    return render_template("admin-dashboard.html",
+                           #admin = session["admin"]
+                           )
+
+@pages.route("/logout")
+def logout():
+    if "admin" in session:
+        session.pop("admin", None)
+    return redirect("/login")
