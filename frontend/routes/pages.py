@@ -85,7 +85,7 @@ def add_project_page():
     if "admin" not in session:
         return redirect("/login")
 
-    return "<h1> NOT IMPLEMENTED </h1>"
+    return render_template("add-project.html")
 
 @pages.route("/inactive-projects", methods = ["GET"])
 def inactive_projects_page():

@@ -38,3 +38,39 @@ async function login() {
         flashMessage(response_json.message)
     }
 }
+
+async function addProject() {
+    event.preventDefault()
+
+    var title = document.querySelector("#title").value;
+    var url = document.querySelector("#url").value;
+    var add_again = document.querySelector("#add-another").checked;
+    var description = document.querySelector("#description-area").value;
+
+    response = await fetch("/api/add-project", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            "title": title,
+            "url": url,
+            "description": description
+        })
+    })
+
+    response_json = await response.json()
+
+    if (response_json.code == 200) {
+        if (add_again == true) {
+            document.querySelector("#title").value = "";
+            document.querySelector("#url").value = "";
+            document.querySelector("#description-area").value = "";
+        }
+        else {
+            window.location.replace("/admin-dashboard")
+        }
+    }
+    else {
+        console.log(response_json)
+        flashMessage(response_json.message)
+    }
+}

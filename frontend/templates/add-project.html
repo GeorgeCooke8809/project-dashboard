@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block scripts %}
+
+{% endblock %}
+
+{% block content %}
+<form class="inline" id="create-project-form" onsubmit="addProject()">
+    <div id="details-entry-panel">
+        <h4>Name</h4>
+        <input id="title" type="text" class="create-project-text">
+
+        <h4>URL</h4>
+        <input id="url" type="text" class="create-project-text">
+
+        <div class="inline">
+            <input id="add-another" name="add-another" type="checkbox">
+            <p>Add another project</p>
+        </div>
+
+        <input type="submit" class="cta-button" value="Add Project">
+    </div>
+
+    <div class="fill-width">
+        <h4>Description</h4>
+        <textarea id="description-area"></textarea>
+    </div>
+</form>
+
+{% endblock %}

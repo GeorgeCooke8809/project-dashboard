@@ -17,6 +17,7 @@ class Project(Base):
     # TODO: Add GitHub link
     # ? favorite: Mapped[bool] = mapped_column(nullable=False)
     # ? datetime_accessed: Mapped[datetime] = mapped_column(nullable=True)
+    # ? last updated/worked on - Admin can change
 
     def __repr__(self):
         return f"<{self.id = }, {self.name = }, {self.url = }, {self.description = }, {self.datetime_created = }, {self.active = }>"

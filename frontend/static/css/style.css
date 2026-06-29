@@ -226,7 +226,7 @@ hr {
 
     align-items: center;
 
-    padding: 10px;
+    padding: 10px 20px;
     margin-right: 20px;
 }
 
@@ -297,6 +297,9 @@ hr {
     font-weight: bolder;
     cursor: pointer;
     text-align: center;
+    padding: 10px 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .cta-button:hover {
@@ -320,4 +323,55 @@ hr {
 
 .right-align {
     text-align: right;
+}
+
+#details-entry-panel {
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    width: 25%;
+    height: 100%;
+    min-height: 94vh;
+    background-color: var(--card-bg-colour);
+    border-color: var(--contrast-colour);
+    border-width: 0.1rem;
+    border-style: solid;
+    font-family: var(--sans-serif-font);
+
+    padding: 10px 20px;
+    margin-right: 20px;
+}
+
+#description-area {
+    resize: none;
+    width: 100%;
+    height: calc(100% - 56px);
+    background-color: var(--hover-colour);
+    box-sizing: border-box;
+
+    border: var(--hyperlink-colour) 2px solid;
+    padding: 5px;
+    color: var(--text-colour);
+    font-size: 11px;
+}
+
+.fill-width {
+    width: 100%;
+}
+
+#create-project-form h4 {
+    font-family: var(--sans-serif-font);
+    margin: 15px 0px 10px 0px;
+    font-size: 27px;
+    font-weight: normal;
+}
+
+.create-project-text {
+    background-color: var(--hover-colour);
+    border: var(--hyperlink-colour) solid;
+    border-width: 0px 0px 2px 0px;
+    border-radius: 0.3rem 0.3rem 0.6rem 0.6rem;
+    padding: 5px;
+    color: var(--text-colour);
+    font-size: 15px;
 }
