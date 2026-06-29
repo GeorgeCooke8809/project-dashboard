@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, render_template, request, session, jsonify
+from flask import Blueprint, redirect, render_template, request, session, jsonify, url_for
 from projects import utils
 from configs import ADMIN_USERNAME, ADMIN_PASSWORD
 
@@ -39,13 +39,15 @@ def details(id: int):
                            details = details)
 
 @pages.route("/login", methods = ["GET", "POST"])
-def login_page():
+def login():
     if request.method == "POST":
         details = request.get_json()
         username = details["username"]
         password = details["password"]
 
         if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
+            session["admin"] = True
+
             return jsonify({
                 "code": 200,
                 "message": ""
@@ -61,3 +63,9 @@ def login_page():
 
 # ==================== Admin Pages ====================
 
+@pages.route("/admin-dashboard", methods = ["GET"])
+def admin_dashboard():
+    if "admin" not in session:
+        return redirect(url_for("login"))
+    
+    return render_template("admin-dashboard.html")
