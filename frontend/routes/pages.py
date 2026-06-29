@@ -63,7 +63,7 @@ def login(): # TODO: Split some off to api file
         if "admin" not in session:
             return render_template("login.html")
         
-        return redirect("/admin-dashboard",
+        return redirect("/admin-dashboard"
                         #admin = session["admin"] # TODO: Add logout in base based on admin flag here
                         )
     
@@ -73,13 +73,35 @@ def login(): # TODO: Split some off to api file
 @pages.route("/admin-dashboard", methods = ["GET"])
 def admin_dashboard():
     if "admin" not in session or session["admin"] != True:
-        return redirect(url_for("pages.login"))
+        return redirect("/login")
     
     return render_template("admin-dashboard.html",
-                           #admin = session["admin"]
+                           #admin = session["admin"],
+                           active_projects = utils.get_active_projects_overview()
                            )
 
-@pages.route("/logout")
+@pages.route("/add-project", methods = ["GET"])
+def add_project_page():
+    if "admin" not in session:
+        return redirect("/login")
+
+    return "<h1> NOT IMPLEMENTED </h1>"
+
+@pages.route("/inactive-projects", methods = ["GET"])
+def inactive_projects_page():
+    if "admin" not in session:
+        return redirect("/login")
+
+    return "<h1> NOT IMPLEMENTED </h1>"
+
+@pages.route("/edit-project/<id>", methods = ["GET"])
+def edit_project_page(id: int):
+    if "admin" not in session:
+        return redirect("/login")
+
+    return "<h1> NOT IMPLEMENTED </h1>"
+
+@pages.route("/logout") # TODO: Move to api file
 def logout():
     if "admin" in session:
         session.pop("admin", None)

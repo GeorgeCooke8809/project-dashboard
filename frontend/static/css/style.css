@@ -10,6 +10,8 @@
     --sans-serif-font: 'Jost', sans-serif;
 
     --link-card-border-radius: 0.4rem;
+
+    --hyperlink-colour: #8d8d8d;
 }
 
 #navigation-bar {
@@ -56,17 +58,20 @@
     color: #dcdbdb;
 }
 
-#admin-login-button {
+.basic-button {
     all: unset;
     background-color: var(--card-bg-colour);
     border: var(--hover-colour) 2px solid;
-    padding: 2px 5px;
+    padding: 5px 5px;
+    font-family: var(--sans-serif-font);
 
     cursor: pointer;
     font-weight: lighter;
+
+    text-align: center;
 }
 
-#admin-login-button:hover {
+.basic-button:hover {
     background-color: var(--hover-colour);
 }
 
@@ -300,4 +305,19 @@ hr {
 
 #login-button {
     margin-top: 20px;
+}
+
+.link {
+    all: unset;
+    cursor: pointer;
+    color: var(--hyperlink-colour);
+    font-style: italic;
+    font-family: var(--sans-serif-font);
+    font-size: 15px;
+
+    margin: 5px 0px;
+}
+
+.right-align {
+    text-align: right;
 }
