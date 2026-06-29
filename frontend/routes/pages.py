@@ -1,5 +1,6 @@
-from flask import Blueprint, redirect, render_template
+from flask import Blueprint, redirect, render_template, request, session, jsonify
 from projects import utils
+from configs import ADMIN_USERNAME, ADMIN_PASSWORD
 
 pages = Blueprint("pages", __name__)
 
@@ -19,7 +20,7 @@ def index():
                             }]
                            )
 
-@pages.route("/details/<id>", methods = ["GEt"])
+@pages.route("/details/<id>", methods = ["GET"])
 def details(id: int):
     try:
         details = utils.get_project_details(id)
@@ -37,4 +38,26 @@ def details(id: int):
     return render_template("details.html",
                            details = details)
 
+@pages.route("/login", methods = ["GET", "POST"])
+def login_page():
+    if request.method == "POST":
+        details = request.get_json()
+        username = details["username"]
+        password = details["password"]
+
+        if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
+            return jsonify({
+                "code": 200,
+                "message": ""
+            })
+        else:
+            return jsonify({
+                "code": 401,
+                "message": "Those login details are not valid."
+            })
+    else:
+        return render_template("login.html")
+    
+
 # ==================== Admin Pages ====================
+
