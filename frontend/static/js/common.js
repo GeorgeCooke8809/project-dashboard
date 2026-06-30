@@ -74,3 +74,43 @@ async function addProject() {
         flashMessage(response_json.message)
     }
 }
+
+async function archiveProject(id) {
+    response = await fetch("/api/archive-project", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            "id": id
+        })
+    })
+
+    response_json = await response.json()
+
+    if (response_json.code == 200) {
+        window.location.replace("./admin-dashboard")
+    }
+    else {
+        console.log(response_json)
+        flashMessage(response_json.message)
+    }
+}
+
+async function restoreProject(id) {
+    response = await fetch("/api/restore-project", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            "id": id
+        })
+    })
+
+    response_json = await response.json()
+
+    if (response_json.code == 200) {
+        window.location.replace("./inactive-projects")
+    }
+    else {
+        console.log(response_json)
+        flashMessage(response_json.message)
+    }
+}

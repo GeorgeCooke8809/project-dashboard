@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block scripts %}
+
+{% endblock %}
+
+{% block content %}
+
+<h1>Inactive Projects</h1>
+
+<div id="inactive-projects">
+    {% if inactive_projects == [] %}
+    <p>No inactive projects</p>
+    {% endif %}
+
+    {% for project in inactive_projects %}
+    <div class="project-card"> <!-- TODO: Make this look better -->
+        <p>{{ project["name"] }}</p>
+        <button class="basic-button" onclick="restoreProject('{{ project['id'] }}')">Restore</button>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

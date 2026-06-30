@@ -3,7 +3,7 @@ from dotenv import load_dotenv, set_key
 from pathlib import Path
 import logging
 
-if os.path.isfile("config.env") != True: # Create new config if none exists
+if os.path.isfile("config.env") != True: # Create new config with default options if none exists. These can be changed by admins.
     logging.warning("config.env did not exist, creating with default settings...")
 
     env_file_path = Path("config.env")

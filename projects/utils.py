@@ -96,12 +96,12 @@ def get_project_details(Session, project_id: int) -> dict:
         "url": project.url,
         "description": project.description,
         "created": project.datetime_created,
-        "created_readable": project.datetime_created.strftime("%d/%m/%Y")
+        "created_readable": project.datetime_created.strftime("%d.%m.%Y")
     }
 
 @with_session
 def get_inactive_projects(Session) -> list[dict]:
-    projects: list[Project] = Session.get(Project).filter(Project.active == False).order_by(Project.datetime_created).all()
+    projects: list[Project] = Session.query(Project).filter(Project.active == False).order_by(Project.datetime_created).all() 
 
     project_dicts = []
 

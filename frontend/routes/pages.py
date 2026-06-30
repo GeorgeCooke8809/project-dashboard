@@ -13,11 +13,7 @@ pages = Blueprint("pages", __name__)
 @pages.route("/", methods = ["GET"])
 def index():
     return render_template("index.html",
-                           projects = [{
-                                "id": 1,
-                                "name": "name",
-                                "url": "google.com"
-                            }]
+                           projects = utils.get_active_projects_overview()
                            )
 
 @pages.route("/details/<id>", methods = ["GET"])
@@ -25,15 +21,7 @@ def details(id: int):
     try:
         details = utils.get_project_details(id)
     except ValueError:
-        details = {
-        "id": 1,
-        "name": "Name",
-        "url": "google.com",
-        "description": "lorem ipsum",
-        "created": "fjkhgkj",
-        "created_readable": "07/05/09"
-    }
-        #return render_template("404.html")
+        return render_template("404.html")
 
     return render_template("details.html",
                            details = details)
@@ -59,7 +47,6 @@ def login(): # TODO: Split some off to api file
                 "message": "Those login details are not valid."
             })
     else:
-        print(f"{session = }")
         if "admin" not in session:
             return render_template("login.html")
         
@@ -92,7 +79,10 @@ def inactive_projects_page():
     if "admin" not in session:
         return redirect("/login")
 
-    return "<h1> NOT IMPLEMENTED </h1>"
+    return render_template("inactive-projects.html",
+                           #admin = session["admin"],
+                           inactive_projects = utils.get_inactive_projects()
+                           )
 
 @pages.route("/edit-project/<id>", methods = ["GET"])
 def edit_project_page(id: int):
