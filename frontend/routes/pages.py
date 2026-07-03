@@ -1,6 +1,7 @@
 from flask import Blueprint, redirect, render_template, request, session, jsonify, url_for
 from projects import utils
 from configs import ADMIN_USERNAME, ADMIN_PASSWORD
+import logging
 
 pages = Blueprint("pages", __name__)
 
@@ -88,8 +89,14 @@ def inactive_projects_page():
 def edit_project_page(id: int):
     if "admin" not in session:
         return redirect("/login")
+    
+    project_details = utils.get_project_details(id)
 
-    return "<h1> NOT IMPLEMENTED </h1>"
+    logging.info(f"{project_details = }")
+
+    return render_template("edit-project.html",
+                           details = project_details
+                           )
 
 @pages.route("/logout") # TODO: Move to api file
 def logout():

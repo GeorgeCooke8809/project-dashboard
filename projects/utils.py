@@ -83,6 +83,17 @@ def get_active_projects_overview(Session) -> list[dict]:
 
 @with_session
 def get_project_details(Session, project_id: int) -> dict:
+    """Get all the details of a given project.
+
+    Args:
+        project_id (int): The ID for the desired project
+
+    Raises:
+        ValueError: Raised if project does not exist
+
+    Returns:
+        dict: id, name: str, url: str, description: str, created: datetime, created_readable: str
+    """
     project: Project = Session.get(Project, project_id)
 
     if project == None:

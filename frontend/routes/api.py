@@ -8,6 +8,14 @@ api = Blueprint("api", __name__)
 @api.route("/add-project", methods = ["POST"])
 def add_project():
     details = request.get_json()
+
+    if details["title"] == "":
+        logging.info("Rejected add project - did not have title.")
+
+        return jsonify({
+            "code": 500,
+            "message": "The name field it required."
+        })
     
     try:
         utils.add_project(name = details["title"], url = details["url"], description = details["description"])

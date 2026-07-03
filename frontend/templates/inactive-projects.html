@@ -14,7 +14,7 @@
     {% endif %}
 
     {% for project in inactive_projects %}
-    <div class="project-card"> <!-- TODO: Make this look better -->
+    <div class="project-row"> <!-- TODO: Make this look better -->
         <p>{{ project["name"] }}</p>
         <button class="basic-button" onclick="restoreProject('{{ project['id'] }}')">Restore</button>
     </div>
