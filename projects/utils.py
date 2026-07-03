@@ -13,7 +13,7 @@ def check_project_exists(Session, project_id: int) -> bool:
     return False
 
 @with_session
-def add_project(Session, name: str, url: str, description: str = None) -> int:
+def add_project(Session, name: str, url: str, description: str = None, created: datetime = datetime.now()) -> int:
     """Adds a new project with all of the given parameters
 
     Args:
@@ -25,7 +25,6 @@ def add_project(Session, name: str, url: str, description: str = None) -> int:
     Returns:
         int: _description_
     """
-    created = datetime.now()
 
     new_project = Project(name = name, url = url, description = description, datetime_created = created, active = True)
     logging.info(f"{new_project = }")
@@ -84,6 +83,17 @@ def get_active_projects_overview(Session) -> list[dict]:
 
 @with_session
 def get_project_details(Session, project_id: int) -> dict:
+    """Get all the details of a given project.
+
+    Args:
+        project_id (int): The ID for the desired project
+
+    Raises:
+        ValueError: Raised if project does not exist
+
+    Returns:
+        dict: id, name: str, url: str, description: str, created: datetime, created_readable: str
+    """
     project: Project = Session.get(Project, project_id)
 
     if project == None:
@@ -96,12 +106,13 @@ def get_project_details(Session, project_id: int) -> dict:
         "name": project.name,
         "url": project.url,
         "description": project.description,
-        "created": project.datetime_created
+        "created": project.datetime_created,
+        "created_readable": project.datetime_created.strftime("%d.%m.%Y")
     }
 
 @with_session
 def get_inactive_projects(Session) -> list[dict]:
-    projects: list[Project] = Session.get(Project).filter(Project.active == False).order_by(Project.datetime_created).all()
+    projects: list[Project] = Session.query(Project).filter(Project.active == False).order_by(Project.datetime_created).all() 
 
     project_dicts = []
 

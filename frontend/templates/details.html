@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block scripts %}
+
+{% endblock %}
+
+{% block content %}
+<div class="inline">
+    <div id="details-info-panel">
+        <h4>{{ details["name"] }}</h4>
+        <a href="http://{{ details['url'] }}">{{ details['url'] }}</a>
+        <p>{{ details["created_readable"] }}</p>
+    </div>
+
+    <p id="details-description">{{ details["description"] }}</p>
+</div>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block scripts %}
+
+{% endblock %}
+
+{% block content %}
+<h1>Projects:</h1>
+
+<hr>
+
+<div id="projects-group">
+    {% if projects == [] %}
+    <p>No active projects</p>
+    {% endif %}
+
+    {% for project in projects %}
+    <div class="project-card">
+        <a class="project-link" href='http://{{ project["url"] }}'>{{ project["url"] }}</a>
+
+        <a href="details/{{ project['id'] }}" class="project-name">{{ project["name"] }}</a>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
