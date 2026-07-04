@@ -18,7 +18,7 @@ def add_project():
         })
     
     try:
-        utils.add_project(name = details["title"], url = details["url"], description = details["description"])
+        utils.add_project(name = details["title"], url = details["url"], description = details["description"], updated = details["updated"], created = details["created"])
         logging.info("Project successfully added")
         return jsonify({
             "code": 200,

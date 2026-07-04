@@ -45,7 +45,9 @@ async function addProject() {
     var title = document.querySelector("#title").value;
     var url = document.querySelector("#url").value;
     var add_again = document.querySelector("#add-another").checked;
-    var description = document.querySelector("#description-area").value;
+    var description = document.querySelector(".description-area-entry").value;
+    var created = document.querySelector("#created").value;
+    var updated = document.querySelector("#updated").value;
 
     response = await fetch("/api/add-project", {
         method: "POST",
@@ -53,7 +55,9 @@ async function addProject() {
         body: JSON.stringify({
             "title": title,
             "url": url,
-            "description": description
+            "description": description,
+            "created": created,
+            "updated": updated
         })
     })
 
@@ -142,4 +146,9 @@ async function editProject(id) {
         console.log(response_json)
         flashMessage(response_json.message)
     }
+}
+
+function setTodays() {
+    let today = new Date().toISOString().substr(0, 10);
+    document.querySelectorAll(".today").value = today;
 }
