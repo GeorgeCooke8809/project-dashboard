@@ -17,13 +17,12 @@
     {% endif %}
 
     {% for project in active_projects %}
-    <div class="project-row"> <!-- TODO: Make this look better -->
+    <div class="project-row">
         <p>{{ project["name"] }}</p>
         <div>
-            <a class="basic-button" href="./edit-project/{{ project['id'] }}">Edit</a> <!-- TODO: Add functionality -->
+            <a class="basic-button" href="./edit-project/{{ project['id'] }}">Edit</a>
             <button class="basic-button" onclick="archiveProject('{{ project['id'] }}')">Archive</button>
         </div>
-        <!-- TODO: Add functionally -->
     </div>
     {% endfor %}
 </div>

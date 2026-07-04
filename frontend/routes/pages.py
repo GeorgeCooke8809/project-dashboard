@@ -1,11 +1,9 @@
-from flask import Blueprint, redirect, render_template, request, session, jsonify, url_for
+from flask import Blueprint, redirect, render_template, request, session, jsonify
 from projects import utils
 from configs import ADMIN_USERNAME, ADMIN_PASSWORD
 import logging
 
 pages = Blueprint("pages", __name__)
-
-# TODO: Add admin add projects
 
 
 # ==================== Main Pages ====================
@@ -31,10 +29,8 @@ def details(id: int):
 def login(): # TODO: Split some off to api file
     if request.method == "POST":
         details = request.get_json()
-        username = details["username"]
-        password = details["password"]
 
-        if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
+        if details["username"] == ADMIN_USERNAME and details["password"] == ADMIN_PASSWORD:
             session.permanent = True
             session["admin"] = True
 
@@ -52,7 +48,7 @@ def login(): # TODO: Split some off to api file
             return render_template("login.html")
         
         return redirect("/admin-dashboard"
-                        #admin = session["admin"] # TODO: Add logout in base based on admin flag here
+                        #admin = session["admin"] # TODO: Add logout in base based on admin flag here - everything above line 49 can be moved to the api file with minimal changes required
                         )
     
 
@@ -97,9 +93,3 @@ def edit_project_page(id: int):
     return render_template("edit-project.html",
                            details = project_details
                            )
-
-@pages.route("/logout") # TODO: Move to api file
-def logout():
-    if "admin" in session:
-        session.pop("admin", None)
-    return redirect("/login")

@@ -353,7 +353,7 @@ hr {
     min-width: 215px;
 }
 
-#description-area {
+.description-area-entry {
     resize: none;
     width: 100%;
     height: calc(100% - 56px);
@@ -363,7 +363,8 @@ hr {
     border: var(--hyperlink-colour) 2px solid;
     padding: 5px;
     color: var(--text-colour);
-    font-size: 11px;
+    font-size: 12px;
+    font-family: var(--sans-serif-font);
 }
 
 .fill-width {
@@ -417,4 +418,8 @@ hr {
 
 .project-row:hover {
     background-color: var(--hover-colour);
+}
+
+#edit-project-button {
+    margin-top: 20px;
 }

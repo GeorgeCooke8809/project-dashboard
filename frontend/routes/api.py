@@ -1,5 +1,5 @@
 from configs import ADMIN_PASSWORD
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, session
 from projects import utils
 import logging
 
@@ -13,7 +13,7 @@ def add_project():
         logging.info("Rejected add project - did not have title.")
 
         return jsonify({
-            "code": 500,
+            "code": 400,
             "message": "The name field it required."
         })
     
@@ -78,3 +78,39 @@ def restore_project():
             "code": 500,
             "message": "Something went wrong restoring the project."
         })
+    
+@api.route("/edit-project", methods = ["POST"])
+def edit_project():
+    details = request.get_json()
+
+    if details["title"] == "":
+        logging.info("Rejected edit project - did not have title.")
+
+        return jsonify({
+            "code": 400,
+            "message": "The name field it required."
+        })
+    
+    try:
+        utils.edit_project(project_id = details["id"], name = details["title"], url = details["url"], description = details["description"])
+        logging.info("Project successfully edited")
+        return jsonify({
+            "code": 200,
+            "message": "Project added successfully."
+        })
+    except:
+        logging.warning(f"Failed to edit project. Error:")
+        return jsonify({
+            "code": 500,
+            "message": "Something went wrong.",
+        })
+    
+@api.route("/logout", methods = ["POST"])
+def logout():
+    if "admin" in session:
+        session.pop("admin", None)
+
+    return jsonify({
+        "code": 200,
+        "message": ""
+    })

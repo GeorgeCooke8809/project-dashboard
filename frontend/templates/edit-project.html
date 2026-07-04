@@ -5,8 +5,7 @@
 {% endblock %}
 
 {% block content %}
-<form class="inline" id="create-project-form" onsubmit="editProject()">
-    <!-- TODO: Make edit project submit do something - currently leads to non-existent js function -->
+<form class="inline" id="create-project-form" onsubmit="editProject('{{ details['id'] }}')">
     <div id="details-entry-panel">
         <h4>Name</h4>
         <input id="title" type="text" class="create-project-text" value="{{ details['name'] }}">
@@ -14,17 +13,12 @@
         <h4>URL</h4>
         <input id="url" type="text" class="create-project-text" value="{{ details['url'] }}">
 
-        <div class="inline">
-            <input id="add-another" name="add-another" type="checkbox">
-            <p>Add another project</p>
-        </div>
-
-        <input type="submit" class="cta-button" value="Add Project" id="add-project-button">
+        <input type="submit" class="cta-button" value="Edit Project" id="edit-project-button">
     </div>
 
     <div class="fill-width">
         <h4>Description</h4>
-        <textarea id="description-area">{{ details['description'] }}</textarea>
+        <textarea class="description-area-entry">{{ details['description'] }}</textarea>
     </div>
 </form>
 
