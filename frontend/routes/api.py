@@ -78,3 +78,29 @@ def restore_project():
             "code": 500,
             "message": "Something went wrong restoring the project."
         })
+    
+@api.route("/edit-project", methods = ["POST"])
+def edit_project():
+    details = request.get_json()
+
+    if details["title"] == "":
+        logging.info("Rejected edit project - did not have title.")
+
+        return jsonify({
+            "code": 500,
+            "message": "The name field it required."
+        })
+    
+    try:
+        utils.edit_project(project_id = details["id"], name = details["title"], url = details["url"], description = details["description"])
+        logging.info("Project successfully edited")
+        return jsonify({
+            "code": 200,
+            "message": "Project added successfully."
+        })
+    except:
+        logging.warning(f"Failed to edit project. Error:")
+        return jsonify({
+            "code": 500,
+            "message": "Something went wrong.",
+        })

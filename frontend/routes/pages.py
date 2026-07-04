@@ -1,11 +1,9 @@
-from flask import Blueprint, redirect, render_template, request, session, jsonify, url_for
+from flask import Blueprint, redirect, render_template, request, session, jsonify
 from projects import utils
 from configs import ADMIN_USERNAME, ADMIN_PASSWORD
 import logging
 
 pages = Blueprint("pages", __name__)
-
-# TODO: Add admin add projects
 
 
 # ==================== Main Pages ====================

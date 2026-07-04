@@ -114,3 +114,32 @@ async function restoreProject(id) {
         flashMessage(response_json.message)
     }
 }
+
+async function editProject(id) {
+    event.preventDefault()
+
+    var title = document.querySelector("#title").value;
+    var url = document.querySelector("#url").value;
+    var description = document.querySelector("#description-area").value;
+
+    response = await fetch("/api/edit-project", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            "id": id,
+            "title": title,
+            "url": url,
+            "description": description
+        })
+    })
+
+    response_json = await response.json()
+
+    if (response_json.code == 200) {
+        window.location.replace("/admin-dashboard")
+    }
+    else {
+        console.log(response_json)
+        flashMessage(response_json.message)
+    }
+}
