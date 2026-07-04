@@ -1,3 +1,5 @@
+Docker Hub: georgecooke8809/project-dashboard
+
 # Requirements:
 - uv,
 

@@ -24,4 +24,4 @@ if __name__ == "__main__":
     logging.critical("Program running")
 
     app = create_app()
-    app.run(debug=DEBUGGING_STATE, port=NETWORK_PORT, use_reloader=False)
+    app.run(host="0.0.0.0", debug=DEBUGGING_STATE, port=NETWORK_PORT, use_reloader=False)
