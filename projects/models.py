@@ -20,4 +20,9 @@ class Project(Base):
     # ? datetime_accessed: Mapped[datetime] = mapped_column(nullable=True)
 
     def __repr__(self):
-        return f"<{self.id = }, {self.name = }, {self.url = }, {self.description = }, self.datetime_created = {self.datetime_created.strftime("%d/%m/%Y, %H:%M:%S")}, self.datetime_updated = {self.datetime_updated.strftime("%d/%m/%Y, %H:%M:%S")}, {self.active = }>"
+        repr_string =  f"<{self.id = }, {self.name = }, {self.url = }, {self.description = }, self.datetime_created = {self.datetime_created.strftime("%d/%m/%Y, %H:%M:%S")}, {self.active = }>"
+
+        if self.datetime_updated != None:
+            repr_string += f", self.datetime_updated = {self.datetime_updated.strftime("%d/%m/%Y, %H:%M:%S")}"
+
+        return repr_string

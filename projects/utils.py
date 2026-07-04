@@ -103,8 +103,7 @@ def get_project_details(Session, project_id: int) -> dict:
         raise ValueError(f"No project with given ID exists. {project_id = }")
 
     logging.info(f"Project To Display: {project}")
-
-    return {
+    details = {
         "id": project.id,
         "name": project.name,
         "url": project.url,
@@ -112,8 +111,12 @@ def get_project_details(Session, project_id: int) -> dict:
         "created": project.datetime_created,
         "created_readable": project.datetime_created.strftime("%d.%m.%Y"),
         "updated": project.datetime_updated,
-        "updated_readable": project.datetime_updated.strftime("%d.%m.%Y")
     }
+
+    if details["updated"] != None:
+        details["updated_readable"] = project.datetime_updated.strftime("%d.%m.%Y")
+
+    return details
 
 @with_session
 def get_inactive_projects(Session) -> list[dict]:

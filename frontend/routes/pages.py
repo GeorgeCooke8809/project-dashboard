@@ -52,7 +52,7 @@ def add_project_page():
     return render_template("add-project.html")
 
 @pages.route("/inactive-projects", methods = ["GET"])
-def inactive_projects_page():
+def inactive_projects_page(): # TODO: Add delete project
     if "admin" not in session:
         return redirect("/login")
 
@@ -66,13 +66,17 @@ def edit_project_page(id: int):
         return redirect("/login")
     
     project_details = utils.get_project_details(id)
+    if project_details["updated"] != None:
+        updated_date = project_details["updated"].strftime("%Y-%m-%d")
+    else:
+        updated_date = None
 
     logging.info(f"{project_details = }")
 
     return render_template("edit-project.html",
                            details = project_details,
                            created = project_details["created"].strftime("%Y-%m-%d"),
-                           updated = project_details["updated"].strftime("%Y-%m-%d")
+                           updated = updated_date
                            )
 
 @pages.route("/logout", methods = ["GET"])

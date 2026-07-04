@@ -439,4 +439,19 @@ hr {
     margin-bottom: 2px;
 }
 
-/* TODO: Update styling for date widgets */
+input[type="date"] {
+    background-color: var(--hover-colour);
+    color: var(--text-colour);
+    border: var(--hyperlink-colour) solid;
+    border-width: 0px 0px 2px 0px;
+    border-radius: var(--link-card-border-radius);
+    padding: 5px 10px;
+    font-family: var(--sans-serif-font);
+}
+
+::-webkit-calendar-picker-indicator {
+    background-color: var(--hyperlink-colour);
+    cursor: pointer;
+    border-radius: 3px;
+    padding: 4px;
+}

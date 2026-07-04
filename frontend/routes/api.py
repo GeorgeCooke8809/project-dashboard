@@ -88,7 +88,23 @@ def edit_project():
 
         return jsonify({
             "code": 400,
-            "message": "The name field it required."
+            "message": "The name field is required."
+        })
+    
+    if details["updated"] == "":
+        logging.info("Rejected edit project - did not have updated date.")
+
+        return jsonify({
+            "code": 400,
+            "message": "The updated field is required."
+        })
+    
+    if details["created"] == "":
+        logging.info("Rejected edit project - did not have created date.")
+
+        return jsonify({
+            "code": 400,
+            "message": "The created field is required."
         })
     
     try:
