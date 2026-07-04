@@ -10,11 +10,11 @@ if os.path.isfile("config.env") != True: # Create new config with default option
 
     env_file_path.touch(mode=0o600, exist_ok=False)
 
-    set_key(dotenv_path=env_file_path, key_to_set="DATABASE_URL", value_to_set="sqlite:///instance\projects.db")
-    set_key(dotenv_path=env_file_path, key_to_set="DEBUGGING_STATE", value_to_set=False)
+    set_key(dotenv_path=env_file_path, key_to_set="DATABASE_URL", value_to_set="sqlite:///instance/projects.db")
+    set_key(dotenv_path=env_file_path, key_to_set="DEBUGGING", value_to_set="")
     set_key(dotenv_path=env_file_path, key_to_set="ADMIN_USERNAME", value_to_set="admin")
     set_key(dotenv_path=env_file_path, key_to_set="ADMIN_PASSWORD", value_to_set="adminpassword123*")
-    set_key(dotenv_path=env_file_path, key_to_set="NETWORK_PORT", value_to_set=5000)
+    set_key(dotenv_path=env_file_path, key_to_set="NETWORK_PORT", value_to_set="5000")
 
 
 load_dotenv("config.env")
