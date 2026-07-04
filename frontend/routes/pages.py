@@ -1,6 +1,5 @@
-from flask import Blueprint, redirect, render_template, request, session, jsonify
+from flask import Blueprint, redirect, render_template, session
 from projects import utils
-from configs import ADMIN_USERNAME, ADMIN_PASSWORD
 import logging
 
 pages = Blueprint("pages", __name__)
@@ -23,33 +22,15 @@ def details(id: int):
         return render_template("404.html")
 
     return render_template("details.html",
-                           details = details)
+                           details = details,
+                           )
 
-@pages.route("/login", methods = ["GET", "POST"])
-def login(): # TODO: Split some off to api file
-    if request.method == "POST":
-        details = request.get_json()
-
-        if details["username"] == ADMIN_USERNAME and details["password"] == ADMIN_PASSWORD:
-            session.permanent = True
-            session["admin"] = True
-
-            return jsonify({
-                "code": 200,
-                "message": ""
-            })
-        else:
-            return jsonify({
-                "code": 401,
-                "message": "Those login details are not valid."
-            })
-    else:
-        if "admin" not in session:
-            return render_template("login.html")
-        
-        return redirect("/admin-dashboard"
-                        #admin = session["admin"] # TODO: Add logout in base based on admin flag here - everything above line 49 can be moved to the api file with minimal changes required
-                        )
+@pages.route("/login", methods = ["GET"])
+def login():
+    if "admin" not in session:
+        return render_template("login.html")
+    
+    return redirect("/admin-dashboard")
     
 
 # ==================== Admin Pages ====================
@@ -60,7 +41,6 @@ def admin_dashboard():
         return redirect("/login")
     
     return render_template("admin-dashboard.html",
-                           #admin = session["admin"],
                            active_projects = utils.get_active_projects_overview()
                            )
 
@@ -77,7 +57,6 @@ def inactive_projects_page():
         return redirect("/login")
 
     return render_template("inactive-projects.html",
-                           #admin = session["admin"],
                            inactive_projects = utils.get_inactive_projects()
                            )
 
@@ -91,5 +70,12 @@ def edit_project_page(id: int):
     logging.info(f"{project_details = }")
 
     return render_template("edit-project.html",
-                           details = project_details
+                           details = project_details,
                            )
+
+@pages.route("/logout", methods = ["GET"])
+def logout():
+    if "admin" in session:
+        session.pop("admin", None)
+
+    return redirect("/login")

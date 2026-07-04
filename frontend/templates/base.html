@@ -18,7 +18,13 @@
         <nav id="navigation-bar">
             <ul>
                 <li><a href="/" class="nav-button">Home</a></li>
-                <li><a href="/login" class="basic-button">Admin</a></li>
+                <div>
+                    <li><a href="/login" class="basic-button">Admin</a></li>
+
+                    {% if "admin" in session %}
+                    <li><a href="/logout" class="basic-button">Log Out</a></li>
+                    {% endif %}
+                </div>
             </ul>
         </nav>
     </nav>

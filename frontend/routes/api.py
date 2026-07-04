@@ -1,4 +1,4 @@
-from configs import ADMIN_PASSWORD
+from configs import ADMIN_USERNAME, ADMIN_PASSWORD
 from flask import Blueprint, jsonify, request, session
 from projects import utils
 import logging
@@ -104,13 +104,21 @@ def edit_project():
             "code": 500,
             "message": "Something went wrong.",
         })
-    
-@api.route("/logout", methods = ["POST"])
-def logout():
-    if "admin" in session:
-        session.pop("admin", None)
 
-    return jsonify({
-        "code": 200,
-        "message": ""
-    })
+@api.route("/login", methods = ["POST"])
+def login():
+    details = request.get_json()
+
+    if details["username"] == ADMIN_USERNAME and details["password"] == ADMIN_PASSWORD:
+        session.permanent = True
+        session["admin"] = True
+
+        return jsonify({
+            "code": 200,
+            "message": ""
+        })
+    else:
+        return jsonify({
+            "code": 401,
+            "message": "Those login details are not valid."
+        })
