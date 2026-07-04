@@ -422,3 +422,19 @@ hr {
 #edit-project-button {
     margin-top: 20px;
 }
+
+.readable-date {
+    margin-left: 5px;
+}
+
+.subtext {
+    color: var(--hyperlink-colour);
+    font-style: italic;
+    font-family: var(--sans-serif-font);
+    font-size: 15px;
+}
+
+.details-date p {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}

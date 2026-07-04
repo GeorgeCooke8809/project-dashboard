@@ -8,8 +8,17 @@
 <div class="inline">
     <div id="details-info-panel">
         <h4>{{ details["name"] }}</h4>
-        <a href="http://{{ details['url'] }}">{{ details['url'] }}</a>
-        <p>{{ details["created_readable"] }}</p>
+        <a href="https://{{ details['url'] }}">{{ details['url'] }}</a>
+
+        <div class="inline details-date">
+            <p class="subtext">Created: </p>
+            <p class="readable-date">{{ details["created_readable"] }}</p>
+        </div>
+
+        <div class="inline details-date">
+            <p class="subtext">Last Updated: </p>
+            <p class="readable-date">{{ details["updated_readable"] }}</p>
+        </div>
     </div>
 
     <p id="details-description">{{ details["description"] }}</p>

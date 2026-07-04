@@ -80,7 +80,7 @@ def restore_project():
         })
     
 @api.route("/edit-project", methods = ["POST"])
-def edit_project():
+def edit_project(): # TODO: make edit project allow for editing created and updated
     details = request.get_json()
 
     if details["title"] == "":

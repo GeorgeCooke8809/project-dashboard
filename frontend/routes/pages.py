@@ -36,7 +36,7 @@ def login():
 # ==================== Admin Pages ====================
 
 @pages.route("/admin-dashboard", methods = ["GET"])
-def admin_dashboard():
+def admin_dashboard(): # ? Make admin dashboard include buttons to work on a project today?
     if "admin" not in session or session["admin"] != True:
         return redirect("/login")
     
