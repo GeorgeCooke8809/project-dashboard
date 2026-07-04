@@ -13,7 +13,7 @@ def add_project():
         logging.info("Rejected add project - did not have title.")
 
         return jsonify({
-            "code": 500,
+            "code": 400,
             "message": "The name field it required."
         })
     
@@ -87,7 +87,7 @@ def edit_project():
         logging.info("Rejected edit project - did not have title.")
 
         return jsonify({
-            "code": 500,
+            "code": 400,
             "message": "The name field it required."
         })
     
