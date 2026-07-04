@@ -1,5 +1,5 @@
 from configs import ADMIN_PASSWORD
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, session
 from projects import utils
 import logging
 
@@ -104,3 +104,13 @@ def edit_project():
             "code": 500,
             "message": "Something went wrong.",
         })
+    
+@api.route("/logout", methods = ["POST"])
+def logout():
+    if "admin" in session:
+        session.pop("admin", None)
+
+    return jsonify({
+        "code": 200,
+        "message": ""
+    })

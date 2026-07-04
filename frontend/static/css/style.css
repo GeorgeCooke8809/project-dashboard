@@ -419,3 +419,7 @@ hr {
 .project-row:hover {
     background-color: var(--hover-colour);
 }
+
+#edit-project-button {
+    margin-top: 20px;
+}
