@@ -71,6 +71,8 @@ def edit_project_page(id: int):
 
     return render_template("edit-project.html",
                            details = project_details,
+                           created = project_details["created"].strftime("%Y-%m-%d"),
+                           updated = project_details["updated"].strftime("%Y-%m-%d")
                            )
 
 @pages.route("/logout", methods = ["GET"])

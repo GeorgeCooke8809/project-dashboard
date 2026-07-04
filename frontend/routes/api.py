@@ -80,7 +80,7 @@ def restore_project():
         })
     
 @api.route("/edit-project", methods = ["POST"])
-def edit_project(): # TODO: make edit project allow for editing created and updated
+def edit_project():
     details = request.get_json()
 
     if details["title"] == "":
@@ -92,7 +92,7 @@ def edit_project(): # TODO: make edit project allow for editing created and upda
         })
     
     try:
-        utils.edit_project(project_id = details["id"], name = details["title"], url = details["url"], description = details["description"])
+        utils.edit_project(project_id = details["id"], name = details["title"], url = details["url"], description = details["description"], created = details["created"], updated = details["updated"])
         logging.info("Project successfully edited")
         return jsonify({
             "code": 200,

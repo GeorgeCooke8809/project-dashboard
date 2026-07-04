@@ -31,19 +31,20 @@ def add_project(Session, name: str, url: str, description: str = None, created: 
     Session.add(new_project)
 
 @with_session
-def edit_project(Session, project_id: int, name: str = None, url: str = None, description: str = None, added: datetime = None, updated: datetime = None):
+def edit_project(Session, project_id: int, name: str = None, url: str = None, description: str = None, created: datetime = None, updated: datetime = None):
     project: Project = Session.get(Project, project_id)
 
     if project == None:
         raise ValueError(f"No project with given ID exists. {project_id = }")
 
     logging.info(f"Project To Edit: {project}")
+    logging.info(f"{project_id = }, {name = }, {url = }, {description = }, {created = }, {updated = }")
 
     if name != None: project.name = name
     if url != None: project.url = url
     if description != None: project.description = description
-    if added != None: project.datetime_created = added
-    if updated != None: project.datetime_updated = updated
+    if created != None: project.datetime_created = datetime.strptime(created, "%Y-%m-%d")
+    if updated != None: project.datetime_updated = datetime.strptime(updated, "%Y-%m-%d")
 
 
 @with_session

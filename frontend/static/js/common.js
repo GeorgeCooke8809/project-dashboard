@@ -124,7 +124,9 @@ async function editProject(id) {
 
     var title = document.querySelector("#title").value;
     var url = document.querySelector("#url").value;
-    var description = document.querySelector("#description-area").value;
+    var description = document.querySelector(".description-area-entry").value;
+    var created = document.querySelector("#created").value;
+    var updated = document.querySelector("#updated").value;
 
     response = await fetch("/api/edit-project", {
         method: "POST",
@@ -133,7 +135,9 @@ async function editProject(id) {
             "id": id,
             "title": title,
             "url": url,
-            "description": description
+            "description": description,
+            "created": created,
+            "updated": updated
         })
     })
 
