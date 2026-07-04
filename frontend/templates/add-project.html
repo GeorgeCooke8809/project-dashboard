@@ -13,6 +13,12 @@
         <h4>URL</h4>
         <input id="url" type="text" class="create-project-text">
 
+        <h4>Created</h4>
+        <input id="created" type="date" class="today">
+
+        <h4>Updated</h4>
+        <input id="updated" type="date" class="today">
+
         <div class="inline">
             <input id="add-another" name="add-another" type="checkbox">
             <p>Add another project</p>
@@ -26,5 +32,16 @@
         <textarea class="description-area-entry"></textarea>
     </div>
 </form>
+
+<script>
+    let today = new Date().toISOString().substr(0, 10);
+    let inputs = document.querySelectorAll(".today")
+
+    console.log(inputs)
+
+    for (let i = 0; i < inputs.length; i++) {
+        inputs[i].value = today;
+    }
+</script>
 
 {% endblock %}

@@ -1,6 +1,7 @@
 from configs import ADMIN_USERNAME, ADMIN_PASSWORD
 from flask import Blueprint, jsonify, request, session
 from projects import utils
+from datetime import datetime
 import logging
 
 api = Blueprint("api", __name__)
@@ -8,6 +9,8 @@ api = Blueprint("api", __name__)
 @api.route("/add-project", methods = ["POST"])
 def add_project():
     details = request.get_json()
+
+    logging.debug(f"{details = }")
 
     if details["title"] == "":
         logging.info("Rejected add project - did not have title.")
@@ -18,7 +21,7 @@ def add_project():
         })
     
     try:
-        utils.add_project(name = details["title"], url = details["url"], description = details["description"])
+        utils.add_project(name = details["title"], url = details["url"], description = details["description"], updated = datetime.strptime(details["updated"], "%Y-%m-%d"), created = datetime.strptime(details["created"], "%Y-%m-%d"))
         logging.info("Project successfully added")
         return jsonify({
             "code": 200,
@@ -88,11 +91,27 @@ def edit_project():
 
         return jsonify({
             "code": 400,
-            "message": "The name field it required."
+            "message": "The name field is required."
+        })
+    
+    if details["updated"] == "":
+        logging.info("Rejected edit project - did not have updated date.")
+
+        return jsonify({
+            "code": 400,
+            "message": "The updated field is required."
+        })
+    
+    if details["created"] == "":
+        logging.info("Rejected edit project - did not have created date.")
+
+        return jsonify({
+            "code": 400,
+            "message": "The created field is required."
         })
     
     try:
-        utils.edit_project(project_id = details["id"], name = details["title"], url = details["url"], description = details["description"])
+        utils.edit_project(project_id = details["id"], name = details["title"], url = details["url"], description = details["description"], created = details["created"], updated = details["updated"])
         logging.info("Project successfully edited")
         return jsonify({
             "code": 200,

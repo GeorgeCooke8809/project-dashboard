@@ -12,12 +12,17 @@ class Project(Base):
     url: Mapped[str] = mapped_column(nullable=True)
     description: Mapped[str] = mapped_column(nullable=True)
     datetime_created: Mapped[datetime] = mapped_column(nullable=False)
+    datetime_updated: Mapped[datetime] = mapped_column(nullable=True)
     active: Mapped[bool] = mapped_column(nullable=False)
     # TODO: Add AI collaboration grade
     # TODO: Add GitHub link
     # ? favorite: Mapped[bool] = mapped_column(nullable=False)
     # ? datetime_accessed: Mapped[datetime] = mapped_column(nullable=True)
-    # ? last updated/worked on - Admin can change
 
     def __repr__(self):
-        return f"<{self.id = }, {self.name = }, {self.url = }, {self.description = }, {self.datetime_created = }, {self.active = }>"
+        repr_string =  f"<{self.id = }, {self.name = }, {self.url = }, {self.description = }, self.datetime_created = {self.datetime_created.strftime("%d/%m/%Y, %H:%M:%S")}, {self.active = }>"
+
+        if self.datetime_updated != None:
+            repr_string += f", self.datetime_updated = {self.datetime_updated.strftime("%d/%m/%Y, %H:%M:%S")}"
+
+        return repr_string

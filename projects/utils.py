@@ -13,7 +13,7 @@ def check_project_exists(Session, project_id: int) -> bool:
     return False
 
 @with_session
-def add_project(Session, name: str, url: str, description: str = None, created: datetime = datetime.now()) -> int:
+def add_project(Session, name: str, url: str, description: str = None, created: datetime = datetime.now(), updated: datetime = datetime.now()) -> int:
     """Adds a new project with all of the given parameters
 
     Args:
@@ -26,22 +26,25 @@ def add_project(Session, name: str, url: str, description: str = None, created: 
         int: _description_
     """
 
-    new_project = Project(name = name, url = url, description = description, datetime_created = created, active = True)
+    new_project = Project(name = name, url = url, description = description, datetime_created = created, active = True, datetime_updated = updated)
     logging.info(f"{new_project = }")
     Session.add(new_project)
 
 @with_session
-def edit_project(Session, project_id: int, name: str = None, url: str = None, description: str = None):
+def edit_project(Session, project_id: int, name: str = None, url: str = None, description: str = None, created: datetime = None, updated: datetime = None):
     project: Project = Session.get(Project, project_id)
 
     if project == None:
         raise ValueError(f"No project with given ID exists. {project_id = }")
 
     logging.info(f"Project To Edit: {project}")
+    logging.info(f"{project_id = }, {name = }, {url = }, {description = }, {created = }, {updated = }")
 
     if name != None: project.name = name
     if url != None: project.url = url
     if description != None: project.description = description
+    if created != None: project.datetime_created = datetime.strptime(created, "%Y-%m-%d")
+    if updated != None: project.datetime_updated = datetime.strptime(updated, "%Y-%m-%d")
 
 
 @with_session
@@ -100,15 +103,20 @@ def get_project_details(Session, project_id: int) -> dict:
         raise ValueError(f"No project with given ID exists. {project_id = }")
 
     logging.info(f"Project To Display: {project}")
-
-    return {
+    details = {
         "id": project.id,
         "name": project.name,
         "url": project.url,
         "description": project.description,
         "created": project.datetime_created,
-        "created_readable": project.datetime_created.strftime("%d.%m.%Y")
+        "created_readable": project.datetime_created.strftime("%d.%m.%Y"),
+        "updated": project.datetime_updated,
     }
+
+    if details["updated"] != None:
+        details["updated_readable"] = project.datetime_updated.strftime("%d.%m.%Y")
+
+    return details
 
 @with_session
 def get_inactive_projects(Session) -> list[dict]:
