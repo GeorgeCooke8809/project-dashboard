@@ -19,7 +19,7 @@ async function login() {
     var username = document.querySelector("#username").value;
     var password = document.querySelector("#password").value;
 
-    response = await fetch("/login", {
+    response = await fetch("/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
