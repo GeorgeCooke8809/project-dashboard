@@ -18,6 +18,13 @@
                 {{ details['url'] }}
             </a>
             {% endif %}
+
+            {% if details["github_link"] %}
+            <a class="details-link" href="https://{{ details['github_link'] }}" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="6" cy="5" r="2"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="7" r="2"/><path d="M6 7v10M18 9c0 5-12 3-12 8"/></svg>
+                GitHub
+            </a>
+            {% endif %}
         </div>
 
         <div id="details-dates">
@@ -28,6 +35,20 @@
             <p class="meta-label">Last updated</p>
             <p>{{ details["updated_readable"] }}</p>
             {% endif %}
+        </div>
+
+        <div id="details-ai-collaboration">
+            <p class="meta-label">AI collaboration</p>
+
+            <div id="ai-rating" class="ai-rating" role="img" aria-label="AI collaboration {{ details['ai_collaboration'] }} out of 5">
+                {% for level in range(1, 6) %}
+                <span class="ai-rating-box ai-rating-level-{{ level }}{% if level == details['ai_collaboration'] %} ai-rating-selected{% endif %}">{{ level }}</span>
+                {% endfor %}
+            </div>
+            <div class="ai-rating-scale">
+                <span>No AI</span>
+                <span>Vibe coded</span>
+            </div>
         </div>
     </div>
 
