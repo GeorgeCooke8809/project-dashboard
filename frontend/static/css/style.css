@@ -499,3 +499,39 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 
 /* * Markdown editor */
+
+/* ! Phone layout */
+
+@media (max-width: 700px) {
+    .container {
+        padding: 24px 16px 40px 16px;
+    }
+
+    h1 {
+        font-size: 44px;
+    }
+
+    #navigation-bar {
+        padding: 0px 16px;
+    }
+
+    #site-name {
+        font-size: 24px;
+    }
+
+    #navigation-bar ul {
+        gap: 6px;
+    }
+
+    #navigation-bar .basic-button {
+        padding: 0px 12px;
+    }
+
+    #flash-container {
+        right: 16px;
+    }
+
+    #projects-group {
+        grid-template-columns: 1fr;
+    }
+}
