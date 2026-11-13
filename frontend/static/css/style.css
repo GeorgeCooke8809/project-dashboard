@@ -18,11 +18,12 @@
     --error-colour: #D9675F;
     --error-background-colour: #38201E;
 
-    --ai-level-1-colour: #7FB77E;
-    --ai-level-2-colour: #B5C26A;
-    --ai-level-3-colour: #CDA349;
-    --ai-level-4-colour: #E39C74;
-    --ai-level-5-colour: #D9675F;
+    --ai-level-1-colour: #2E7D32;
+    --ai-level-2-colour: #5C7F12;
+    --ai-level-3-colour: #9A6B00;
+    --ai-level-4-colour: #B8541A;
+    --ai-level-5-colour: #C62828;
+    --text-on-ai-level-colour: #FFFFFF;
 
     --scrollbar-colour: #47443F;
     --scrollbar-hover-colour: #5E5A54;
@@ -338,7 +339,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .ai-rating-box.ai-rating-selected {
     font-weight: 600;
-    color: var(--text-on-accent-colour);
+    color: var(--text-on-ai-level-colour);
 }
 
 button.ai-rating-box {
