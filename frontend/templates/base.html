@@ -17,23 +17,22 @@
 </head>
 
 <body>
-    <nav>
-        <nav id="navigation-bar">
-            <ul>
-                <li><a href="/" class="nav-button">Home</a></li>
-                <div>
-                    <li><a href="/login" class="basic-button">Admin</a></li>
+    <nav id="navigation-bar">
+        <a href="/" id="site-name">George Cooke</a>
 
-                    {% if "admin" in session %}
-                    <li><a href="/logout" class="basic-button">Log Out</a></li>
-                    {% endif %}
-                </div>
-            </ul>
-        </nav>
+        <ul>
+            <li><a href="/login" class="basic-button">Admin</a></li>
+
+            {% if "admin" in session %}
+            <li><a href="/logout" class="basic-button">Log Out</a></li>
+            {% endif %}
+        </ul>
     </nav>
 
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
 
-    {% block content %}{% endblock %}
     <div id="flash-container"></div>
 </body>
 
