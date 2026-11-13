@@ -7,7 +7,7 @@ import logging
 api = Blueprint("api", __name__)
 
 @api.route("/add-project", methods = ["POST"])
-def add_project():
+def add_project(): # TODO: Add validation to make sure that projects aren't created / updated after current date - this will have to be done in add_project and edit_project
     details = request.get_json()
 
     logging.debug(f"{details = }")

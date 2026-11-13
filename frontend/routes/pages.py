@@ -9,13 +9,15 @@ pages = Blueprint("pages", __name__)
 
 
 @pages.route("/", methods = ["GET"])
-def index():
+def index(): # TODO: make show github link on project card if it does not have a link
     return render_template("index.html",
                            projects = utils.get_active_projects_overview()
                            )
 
 @pages.route("/details/<id>", methods = ["GET"])
 def details(id: int):
+    # TODO: Make details page mobile responsive
+    # TODO: Line breaks do not render in the details page
     try:
         details = utils.get_project_details(id)
     except ValueError:
@@ -52,7 +54,7 @@ def add_project_page():
     return render_template("add-project.html")
 
 @pages.route("/inactive-projects", methods = ["GET"])
-def inactive_projects_page(): # TODO: Add delete project
+def inactive_projects_page(): # TODO: Add delete project button
     if "admin" not in session:
         return redirect("/login")
 
