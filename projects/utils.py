@@ -2,6 +2,7 @@ from projects.models import Project
 import logging
 from datetime import datetime
 from projects.db import with_session
+import markdown
 
 @with_session
 def check_project_exists(Session, project_id: int) -> bool:
@@ -107,7 +108,7 @@ def get_project_details(Session, project_id: int) -> dict:
         "id": project.id,
         "name": project.name,
         "url": project.url,
-        "description": project.description,
+        "description_html": render_markdown(project.description),
         "created": project.datetime_created,
         "created_readable": project.datetime_created.strftime("%d.%m.%Y"),
         "updated": project.datetime_updated,
@@ -132,3 +133,9 @@ def get_inactive_projects(Session) -> list[dict]:
         })
 
     return project_dicts
+
+def render_markdown(text: str):
+    if text == "" or text is None:
+        return ""
+
+    return markdown.markdown(text, extensions = ["fenced_code", "tables", "codehilite", "nl2br", "sane_lists"], extension_configs = {"codehilite": {"css_class": "highlight", "guess_lang": False}})

@@ -141,3 +141,13 @@ def login():
             "code": 401,
             "message": "Those login details are not valid."
         })
+
+@api.route("/render-markdown", methods = ["POST"])
+def render_markdown():
+    text = request.get_json()["text"]
+
+    return jsonify({
+        "code": 200,
+        "message": "",
+        "html": utils.render_markdown(text)
+    })
