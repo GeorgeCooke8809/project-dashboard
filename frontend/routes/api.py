@@ -146,8 +146,14 @@ def login():
 def render_markdown():
     text = request.get_json()["text"]
 
-    return jsonify({
-        "code": 200,
-        "message": "",
-        "html": utils.render_markdown(text)
-    })
+    try:
+        return jsonify({
+            "code": 200,
+            "message": "",
+            "html": utils.render_markdown(text)
+        })
+    except:
+        return jsonify({
+            "code": 400,
+            "message": "Something went wrong rendering markdown"
+        })
