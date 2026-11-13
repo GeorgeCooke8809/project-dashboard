@@ -6,14 +6,18 @@
 
 {% block content %}
 
-<form id="login-window" onsubmit="login()">
-    <h2>Sign In</h2>
+<form id="login-window" class="card" onsubmit="login()">
+    <h1>Sign In</h1>
 
-    <h3>Username</h3>
-    <input type="text" id="username">
+    <div class="field">
+        <label for="username">Username</label>
+        <input type="text" id="username" autocomplete="username">
+    </div>
 
-    <h3>Password</h3>
-    <input type="password" id="password">
+    <div class="field">
+        <label for="password">Password</label>
+        <input type="password" id="password" autocomplete="current-password">
+    </div>
 
     <button id="login-button" class="cta-button" type="submit">Sign In</button>
 </form>
