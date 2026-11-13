@@ -18,6 +18,12 @@
     --error-colour: #D9675F;
     --error-background-colour: #38201E;
 
+    --ai-level-1-colour: #7FB77E;
+    --ai-level-2-colour: #B5C26A;
+    --ai-level-3-colour: #CDA349;
+    --ai-level-4-colour: #E39C74;
+    --ai-level-5-colour: #D9675F;
+
     --scrollbar-colour: #47443F;
     --scrollbar-hover-colour: #5E5A54;
 
@@ -303,6 +309,70 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     stroke: none;
 }
 
+/* * AI collaboration rating */
+
+.ai-rating {
+    display: flex;
+    gap: 8px;
+}
+
+.ai-rating-box {
+    background-color: transparent;
+    border: 2px solid var(--strong-border-colour);
+    border-radius: var(--control-border-radius);
+
+    box-sizing: border-box;
+    width: 40px;
+    height: 40px;
+    margin: 0px;
+    padding: 0px;
+}
+
+button.ai-rating-box {
+    cursor: pointer;
+}
+
+button.ai-rating-box:hover {
+    border-color: var(--accent-colour);
+}
+
+button.ai-rating-box:focus-visible {
+    outline: 2px solid var(--accent-colour);
+    outline-offset: 2px;
+}
+
+.ai-rating-level-1.ai-rating-filled {
+    background-color: var(--ai-level-1-colour);
+    border-color: var(--ai-level-1-colour);
+}
+
+.ai-rating-level-2.ai-rating-filled {
+    background-color: var(--ai-level-2-colour);
+    border-color: var(--ai-level-2-colour);
+}
+
+.ai-rating-level-3.ai-rating-filled {
+    background-color: var(--ai-level-3-colour);
+    border-color: var(--ai-level-3-colour);
+}
+
+.ai-rating-level-4.ai-rating-filled {
+    background-color: var(--ai-level-4-colour);
+    border-color: var(--ai-level-4-colour);
+}
+
+.ai-rating-level-5.ai-rating-filled {
+    background-color: var(--ai-level-5-colour);
+    border-color: var(--ai-level-5-colour);
+}
+
+.ai-rating-name {
+    margin: 8px 0px 0px 0px;
+
+    font-size: 14px;
+    color: var(--muted-text-colour);
+}
+
 
 /* ! Pages */
 
@@ -563,6 +633,20 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 #details-dates .meta-label {
+    font-size: 14px;
+    color: var(--muted-text-colour);
+}
+
+#details-ai-collaboration {
+    border-top: 1px solid var(--border-colour);
+
+    margin-top: 16px;
+    padding-top: 16px;
+}
+
+#details-ai-collaboration .meta-label {
+    margin: 0px 0px 10px 0px;
+
     font-size: 14px;
     color: var(--muted-text-colour);
 }
