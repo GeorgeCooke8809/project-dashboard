@@ -23,6 +23,11 @@
         </div>
 
         <div class="field">
+            <label for="github-link">GitHub</label>
+            <input id="github-link" type="text" placeholder="github.com/user/repo" value="{% if details['github_link'] != None %}{{ details['github_link'] }}{% endif %}">
+        </div>
+
+        <div class="field">
             <label for="created">Created</label>
             <input id="created" type="date" value="{{ created }}">
         </div>
