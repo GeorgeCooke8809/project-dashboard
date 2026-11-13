@@ -38,7 +38,7 @@ def check_project_exists(Session, project_id: int) -> bool:
     return False
 
 @with_session
-def add_project(Session, name: str, url: str, description: str = None, created: datetime = datetime.now(), updated: datetime = datetime.now()) -> int:
+def add_project(Session, name: str, url: str, description: str = None, created: datetime = datetime.now(), updated: datetime = datetime.now(), ai_collaboration: int = 0, github_link: str = None) -> int:
     """Adds a new project with all of the given parameters
 
     Args:
@@ -50,13 +50,16 @@ def add_project(Session, name: str, url: str, description: str = None, created: 
     Returns:
         int: _description_
     """
+    if type(ai_collaboration) != int or ai_collaboration > 5 or ai_collaboration < 0:
+        logging.error("Invalid ai_collaboration grade given")
+        raise ValueError
 
-    new_project = Project(name = name, url = url, description = description, datetime_created = created, active = True, datetime_updated = updated)
+    new_project = Project(name = name, url = url, description = description, datetime_created = created, active = True, datetime_updated = updated, ai_collaboration = ai_collaboration, github_link = github_link)
     logging.info(f"{new_project = }")
     Session.add(new_project)
 
 @with_session
-def edit_project(Session, project_id: int, name: str = None, url: str = None, description: str = None, created: datetime = None, updated: datetime = None):
+def edit_project(Session, project_id: int, name: str = None, url: str = None, description: str = None, created: datetime = None, updated: datetime = None, ai_collaboration: str = None, github_link: str = None):
     project: Project = Session.get(Project, project_id)
 
     if project == None:
@@ -70,6 +73,10 @@ def edit_project(Session, project_id: int, name: str = None, url: str = None, de
     if description != None: project.description = description
     if created != None: project.datetime_created = datetime.strptime(created, "%Y-%m-%d")
     if updated != None: project.datetime_updated = datetime.strptime(updated, "%Y-%m-%d")
+    if ai_collaboration != None:
+        if (type(ai_collaboration) == int and ai_collaboration >=0 and ai_collaboration <= 5):
+            project.ai_collaboration = ai_collaboration
+    if github_link != None: project.github_link = github_link
 
 
 @with_session
@@ -96,7 +103,7 @@ def activate_project(Session, project_id: int):
 
 @with_session
 def get_active_projects_overview(Session) -> list[dict]:
-    projects: list[Project] = Session.query(Project).filter(Project.active == True).order_by(Project.datetime_created).all() # ? Make this order by change with user choice
+    projects: list[Project] = Session.query(Project).filter(Project.active == True).order_by(Project.datetime_updated.desc()).all() # ? Make this order by change with user choice
 
     project_dicts = []
 
@@ -137,6 +144,8 @@ def get_project_details(Session, project_id: int) -> dict:
         "created": project.datetime_created,
         "created_readable": project.datetime_created.strftime("%d.%m.%Y"),
         "updated": project.datetime_updated,
+        "ai_collaboration": project.ai_collaboration,
+        "github_link": project.github_link
     }
 
     if details["updated"] != None:
