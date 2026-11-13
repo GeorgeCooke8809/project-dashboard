@@ -699,6 +699,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding: 14px 16px;
     overflow-x: auto;
 
+    font-family: var(--code-font);
+    font-size: 14px;
+    line-height: 1.6;
+
     scrollbar-width: thin;
     scrollbar-color: var(--scrollbar-colour) transparent;
 }
