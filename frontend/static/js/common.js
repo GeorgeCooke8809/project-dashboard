@@ -49,7 +49,6 @@ async function addProject() {
     var title = document.querySelector("#title").value;
     var url = document.querySelector("#url").value;
     var github_link = document.querySelector("#github-link").value
-    var ai_collaboration = document.querySelectorAll("#ai-rating .ai-rating-filled").length
     var add_again = document.querySelector("#add-another").checked;
     var description = document.querySelector("#description").value
     var created = document.querySelector("#created").value;
@@ -136,7 +135,6 @@ async function editProject(id) {
     var title = document.querySelector("#title").value;
     var url = document.querySelector("#url").value;
     var github_link = document.querySelector("#github-link").value
-    var ai_collaboration = document.querySelectorAll("#ai-rating .ai-rating-filled").length
     var description = document.querySelector("#description").value
     var created = document.querySelector("#created").value;
     var updated = document.querySelector("#updated").value;
@@ -174,20 +172,36 @@ function setTodays() {
 
 // ! AI collaboration rating
 
-function setAiCollaboration(rating) { // Fills in the boxes up to the one clicked, or clears them all if the current rating is clicked again
-    let current_rating = document.querySelectorAll("#ai-rating .ai-rating-filled").length
+let ai_collaboration = 0
 
-    if (rating == current_rating) {
+function findAiCollaboration() { // Finds which box was selected when the page loaded (0 if none are)
+    let boxes = document.querySelectorAll("#ai-rating .ai-rating-box")
+
+    for (let i = 0; i < boxes.length; i++) {
+        if (boxes[i].className.includes("ai-rating-selected")) {
+            ai_collaboration = i + 1
+        }
+    }
+}
+
+function setAiCollaboration(rating) { // Selects the box clicked, or clears it back to 0 if it was already selected
+    if (rating == ai_collaboration) {
         rating = 0
     }
+
+    ai_collaboration = rating
 
     let boxes = document.querySelectorAll("#ai-rating .ai-rating-box")
 
     for (let i = 0; i < boxes.length; i++) {
-        if (i < rating) {
-            boxes[i].classList.add("ai-rating-filled")
+        if (i + 1 == rating) {
+            boxes[i].classList.add("ai-rating-selected")
         } else {
-            boxes[i].classList.remove("ai-rating-filled")
+            boxes[i].classList.remove("ai-rating-selected")
         }
     }
+}
+
+if (document.querySelector("#ai-rating") !== null) { // Only on pages that show the rating
+    findAiCollaboration()
 }
