@@ -96,7 +96,7 @@ def get_project_details(Session, project_id: int) -> dict:
         ValueError: Raised if project does not exist
 
     Returns:
-        dict: id, name: str, url: str, description: str, created: datetime, created_readable: str
+        dict: id, name: str, url: str, description: str, description_html: str, created: datetime, created_readable: str
     """
     project: Project = Session.get(Project, project_id)
 
@@ -108,6 +108,7 @@ def get_project_details(Session, project_id: int) -> dict:
         "id": project.id,
         "name": project.name,
         "url": project.url,
+        "description": project.description,
         "description_html": render_markdown(project.description),
         "created": project.datetime_created,
         "created_readable": project.datetime_created.strftime("%d.%m.%Y"),
