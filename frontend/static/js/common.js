@@ -48,6 +48,8 @@ async function addProject() {
 
     var title = document.querySelector("#title").value;
     var url = document.querySelector("#url").value;
+    var github_link = document.querySelector("#github-link").value
+    var ai_collaboration = document.querySelectorAll("#ai-rating .ai-rating-filled").length
     var add_again = document.querySelector("#add-another").checked;
     var description = document.querySelector("#description").value
     var created = document.querySelector("#created").value;
@@ -61,7 +63,9 @@ async function addProject() {
             "url": url,
             "description": description,
             "created": created,
-            "updated": updated
+            "updated": updated,
+            "ai_collaboration": ai_collaboration,
+            "github_link": github_link
         })
     })
 
@@ -71,6 +75,8 @@ async function addProject() {
         if (add_again == true) {
             document.querySelector("#title").value = "";
             document.querySelector("#url").value = "";
+            document.querySelector("#github-link").value = ""
+            setAiCollaboration(0)
             document.querySelector("#description").value = ""
             showWriteTab()
         }
@@ -129,6 +135,8 @@ async function editProject(id) {
 
     var title = document.querySelector("#title").value;
     var url = document.querySelector("#url").value;
+    var github_link = document.querySelector("#github-link").value
+    var ai_collaboration = document.querySelectorAll("#ai-rating .ai-rating-filled").length
     var description = document.querySelector("#description").value
     var created = document.querySelector("#created").value;
     var updated = document.querySelector("#updated").value;
@@ -142,7 +150,9 @@ async function editProject(id) {
             "url": url,
             "description": description,
             "created": created,
-            "updated": updated
+            "updated": updated,
+            "ai_collaboration": ai_collaboration,
+            "github_link": github_link
         })
     })
 
