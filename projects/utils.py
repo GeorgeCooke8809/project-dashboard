@@ -155,4 +155,4 @@ def render_markdown(text: str):
     if text == "" or text is None:
         return ""
 
-    return markdown.markdown(text, extensions = ["fenced_code", "tables", "codehilite", "nl2br", "sane_lists"], extension_configs = {"codehilite": {"css_class": "highlight", "guess_lang": False, "pygments_formatter": LabelledFormatter, "lang_prefix": ""}}) # New syntax: markdown.markdown(text) - turns Markdown text into HTML
+    return markdown.markdown(text, extensions=["fenced_code", "tables", "codehilite", "nl2br", "sane_lists"], extension_configs={"codehilite": {"css_class": "highlight", "guess_lang": False, "pygments_formatter": LabelledFormatter, "lang_prefix": ""}}) # New syntax: markdown.markdown(text) - turns Markdown text into HTML
