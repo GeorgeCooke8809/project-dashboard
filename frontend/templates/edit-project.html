@@ -37,6 +37,18 @@
             <input id="updated" type="date" value="{{ updated }}">
         </div>
 
+        <div class="field">
+            <label id="ai-rating-label">AI collaboration</label>
+
+            <div id="ai-rating" class="ai-rating" role="group" aria-labelledby="ai-rating-label">
+                {% for level in range(1, 6) %}
+                <button type="button" class="ai-rating-box ai-rating-level-{{ level }}{% if level <= details['ai_collaboration'] %} ai-rating-filled{% endif %}" aria-label="{{ level }} out of 5" onclick="setAiCollaboration({{ level }})"></button>
+                {% endfor %}
+            </div>
+
+            <p id="ai-rating-name" class="ai-rating-name"></p>
+        </div>
+
         <button type="submit" class="cta-button form-submit-button" id="edit-project-button">Edit Project</button>
     </div>
 
