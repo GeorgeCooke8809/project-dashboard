@@ -72,6 +72,7 @@ async function addProject() {
             document.querySelector("#title").value = "";
             document.querySelector("#url").value = "";
             document.querySelector("#description").value = ""
+            showWriteTab()
         }
         else {
             window.location.replace("/admin-dashboard")

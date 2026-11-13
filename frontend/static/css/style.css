@@ -552,6 +552,94 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 /* * Markdown editor */
 
+#project-form-editor {
+    padding-top: 8px;
+}
+
+.editor-toolbar {
+    border-bottom: 1px solid var(--border-colour);
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.editor-tab {
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+
+    min-height: 44px;
+    padding: 0px 16px;
+
+    font-family: var(--body-font);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--muted-text-colour);
+
+    cursor: pointer;
+}
+
+.editor-tab:hover {
+    color: var(--heading-text-colour);
+}
+
+.editor-tab-active {
+    border-bottom-color: var(--accent-colour);
+
+    color: var(--heading-text-colour);
+}
+
+.editor-hint {
+    font-size: 13px;
+    color: var(--muted-text-colour);
+}
+
+.editor-hint-touch {
+    display: none;
+}
+
+@media (pointer: coarse) {
+    .editor-hint-mouse {
+        display: none;
+    }
+
+    .editor-hint-touch {
+        display: inline;
+    }
+}
+
+.editor-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+}
+
+.editor-area {
+    min-height: 440px;
+    padding: 14px 16px;
+
+    font-family: var(--code-font);
+    font-size: 15px;
+    line-height: 1.65;
+    tab-size: 4;
+
+    resize: vertical;
+}
+
+#editor-preview {
+    min-height: 440px;
+}
+
+.editor-hidden {
+    display: none;
+}
+
 /* ! Phone layout */
 
 @media (max-width: 700px) {
@@ -594,6 +682,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
     #project-form-fields {
         max-width: none;
+    }
+
+    /* Markdown editor */
+    .editor-area, #editor-preview {
+        min-height: 170px;
     }
 }
 

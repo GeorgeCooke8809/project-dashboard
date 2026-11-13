@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 
 {% block scripts %}
-
+<script defer src="{{ url_for('static', filename='js/details.js') }}"></script>
+<script defer src="{{ url_for('static', filename='js/editor.js') }}"></script>
 {% endblock %}
 
 {% block content %}
@@ -35,8 +36,20 @@
     </div>
 
     <div id="project-form-editor" class="card">
-        <label for="description">Description</label>
-        <textarea id="description">{% if details['description'] != None %}{{ details['description'] }}{% endif %}</textarea>
+        <div class="editor-toolbar">
+            <div role="tablist" aria-label="Description editor">
+                <button type="button" role="tab" id="write-tab" class="editor-tab editor-tab-active" aria-selected="true" onclick="showWriteTab()">Write</button>
+                <button type="button" role="tab" id="preview-tab" class="editor-tab" aria-selected="false" onclick="showPreviewTab()">Preview</button>
+            </div>
+
+            <span class="editor-hint editor-hint-mouse">Markdown · right-click to insert</span>
+            <span class="editor-hint editor-hint-touch">Markdown · long-press to insert</span>
+        </div>
+
+        <label for="description" class="editor-label">Description</label>
+        <textarea id="description" class="editor-area">{% if details['description'] != None %}{{ details['description'] }}{% endif %}</textarea>
+
+        <div id="editor-preview" class="markdown editor-hidden"></div>
     </div>
 </form>
 
