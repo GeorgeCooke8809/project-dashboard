@@ -114,33 +114,6 @@ h1 {
     list-style: none;
 }
 
-#flash-container {
-    position: fixed;
-    top: 0px;
-    left: 0px;
-}
-
-.flash-message {
-    display: flex;
-    align-items: center;
-    font-family: var(--body-font);
-
-    border-left-style: solid;
-    border-left-color: #872c2c;
-    border-left-width: 7.5px;
-
-    width: 500px;
-    min-height: 50px;
-
-    padding: 5px;
-    margin: 5px 0px;
-
-    border-top-right-radius: 0.5rem;
-    border-bottom-right-radius: 0.5rem;
-    background-color: #ce5555;
-    color: var(--heading-text-colour);
-}
-
 h1 {
     margin-bottom: 0px;
 }
@@ -557,4 +530,47 @@ input[type="date"] {
 input[type="date"]::-webkit-calendar-picker-indicator {
     filter: invert(.75);
     cursor: pointer;
+}
+
+/* * Flash messages */
+
+#flash-container {
+    position: fixed;
+    top: 84px;
+    right: 24px;
+    z-index: 20;
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: min(360px, 100% - 32px);
+}
+
+.flash-message {
+    background-color: var(--error-background-colour);
+    border: 1px solid var(--error-colour);
+    border-radius: var(--card-border-radius);
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+
+    font-family: var(--body-font);
+    font-size: 15px;
+    color: var(--heading-text-colour);
+}
+
+.flash-message svg {
+    flex-shrink: 0;
+
+    fill: none;
+    stroke: var(--error-colour);
+    stroke-width: 2px;
+    stroke-linecap: round;
+}
+
+.flash-message .flash-icon-dot {
+    fill: var(--error-colour);
+    stroke: none;
 }
