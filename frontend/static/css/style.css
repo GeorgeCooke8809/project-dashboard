@@ -488,6 +488,94 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 /* * Details page */
 
+#details-columns {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 24px;
+
+    margin-top: 8px;
+}
+
+#details-info-panel {
+    flex: 1 1 260px;
+    max-width: 320px;
+}
+
+#details-info-panel.sticky-panel {
+    position: sticky;
+    top: 88px;
+}
+
+#details-name {
+    margin-bottom: 12px;
+
+    font-size: 40px;
+    overflow-wrap: anywhere;
+}
+
+.details-links {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.details-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+
+    font-size: 15px;
+    color: var(--accent-colour);
+    text-decoration: none;
+    overflow-wrap: anywhere;
+}
+
+.details-link:hover {
+    text-decoration: underline;
+}
+
+.details-link svg {
+    flex-shrink: 0;
+
+    fill: none;
+    stroke: var(--accent-colour);
+    stroke-width: 2px;
+}
+
+#details-dates {
+    border-top: 1px solid var(--border-colour);
+
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: baseline;
+    gap: 8px 16px;
+
+    margin-top: 16px;
+    padding-top: 16px;
+}
+
+#details-dates p {
+    margin: 0px;
+
+    font-size: 15px;
+}
+
+#details-dates .meta-label {
+    font-size: 14px;
+    color: var(--muted-text-colour);
+}
+
+#details-description {
+    flex: 999 1 420px;
+    min-width: 0px;
+}
+
+#details-description > .muted-text {
+    margin: 0px;
+}
+
 
 /* * Markdown */
 
