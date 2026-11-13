@@ -872,6 +872,29 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     #projects-group {
         grid-template-columns: 1fr;
     }
+
+    /* Details page */
+
+    #details-info-panel {
+        max-width: none;
+    }
+
+    #details-info-panel.sticky-panel {
+        position: static;
+    }
+
+    #details-name {
+        font-size: 34px;
+    }
+
+    #details-description {
+        padding: 20px 16px;
+    }
+
+    .markdown table {
+        display: block;
+        overflow-x: auto;
+    }
 }
 
 /* * Classical touches - remove class="classical" from <body> in base.html to turn these off */
