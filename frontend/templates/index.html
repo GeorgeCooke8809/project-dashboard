@@ -5,20 +5,28 @@
 {% endblock %}
 
 {% block content %}
-<h1>Projects:</h1>
-
-<hr>
+<div class="page-heading">
+    <h1>Projects</h1>
+    <p class="muted-text">{{ projects | length }} active projects</p> {# New syntax: | length - gives the number of items in the list #}
+</div>
 
 <div id="projects-group">
     {% if projects == [] %}
-    <p>No active projects</p>
+    <p class="muted-text">No active projects</p> {# New syntax: | length - gives the number of items in the list #}
     {% endif %}
 
     {% for project in projects %}
-    <div class="project-card">
-        <a class="project-link" href='http://{{ project["url"] }}'>{{ project["url"] }}</a>
-
+    <div class="card clickable-card project-card">
         <a href="details/{{ project['id'] }}" class="project-name">{{ project["name"] }}</a>
+
+        {% if project["url"] %}
+        <a class="project-link" href='http://{{ project["url"] }}' target="_blank" rel="noopener">
+            {{ project["url"] }}
+            <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </a>
+        {% endif %}
+
+        <a href="details/{{ project['id'] }}" class="view-details">View details →</a>
     </div>
     {% endfor %}
 </div>
