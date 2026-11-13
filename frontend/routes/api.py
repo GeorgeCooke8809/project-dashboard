@@ -7,7 +7,7 @@ import logging
 api = Blueprint("api", __name__)
 
 @api.route("/add-project", methods = ["POST"])
-def add_project():
+def add_project(): # TODO: Add validation to make sure that projects aren't created / updated after current date - this will have to be done in add_project and edit_project
     details = request.get_json()
 
     logging.debug(f"{details = }")
@@ -140,4 +140,20 @@ def login():
         return jsonify({
             "code": 401,
             "message": "Those login details are not valid."
+        })
+
+@api.route("/render-markdown", methods = ["POST"])
+def render_markdown():
+    text = request.get_json()["text"]
+
+    try:
+        return jsonify({
+            "code": 200,
+            "message": "",
+            "html": utils.render_markdown(text)
+        })
+    except:
+        return jsonify({
+            "code": 400,
+            "message": "Something went wrong rendering markdown"
         })

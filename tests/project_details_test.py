@@ -22,6 +22,18 @@ class TestProjectDetails:
         assert details["url"] == "URL 1"
         assert details["description"] == None
 
+    def test_details_description_html(self):
+        projects.utils.add_project("Project 1", "URL 1", "**Bold**")
+        details: dict = projects.utils.get_project_details(1)
+
+        assert "<strong>Bold</strong>" in details["description_html"]
+
+    def test_details_no_description_html(self):
+        projects.utils.add_project("Project 1", "URL 1")
+        details: dict = projects.utils.get_project_details(1)
+
+        assert details["description_html"] == ""
+
     def test_no_project_exists(self):
         with pytest.raises(ValueError):
             projects.utils.get_project_details(1)

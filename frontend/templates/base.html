@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>George Cooke - Projects</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@400;500;600&display=swap">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
     <script defer src="{{ url_for('static', filename='js/common.js') }}"></script>
@@ -13,25 +16,24 @@
     {% block scripts %}{% endblock %}
 </head>
 
-<body>
-    <nav>
-        <nav id="navigation-bar">
-            <ul>
-                <li><a href="/" class="nav-button">Home</a></li>
-                <div>
-                    <li><a href="/login" class="basic-button">Admin</a></li>
+<body class="classical">
+    <nav id="navigation-bar">
+        <a href="/" id="site-name">George Cooke</a>
 
-                    {% if "admin" in session %}
-                    <li><a href="/logout" class="basic-button">Log Out</a></li>
-                    {% endif %}
-                </div>
-            </ul>
-        </nav>
+        <ul>
+            <li><a href="/login" class="basic-button">Admin</a></li>
+
+            {% if "admin" in session %}
+            <li><a href="/logout" class="basic-button">Log Out</a></li>
+            {% endif %}
+        </ul>
     </nav>
 
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
 
-    {% block content %}{% endblock %}
-    <div id="flash-container"></div>
+    <div id="flash-container" role="status"></div>
 </body>
 
 </html>

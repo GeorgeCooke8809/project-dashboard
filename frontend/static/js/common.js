@@ -4,7 +4,11 @@ async function flashMessage(message) {
 
     const msg = document.createElement("div");
     msg.className = "flash-message";
-    msg.textContent = message;
+    msg.innerHTML = `<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="7" x2="12" y2="13"/><circle class="flash-icon-dot" cx="12" cy="17" r="1.3"/></svg>` // New syntax: .innerHTML - turns the text into HTML elements inside msg (used for the "!" icon)
+
+    const text = document.createElement("span")
+    text.textContent = message
+    msg.appendChild(text)
 
     container.appendChild(msg);
 
@@ -45,7 +49,7 @@ async function addProject() {
     var title = document.querySelector("#title").value;
     var url = document.querySelector("#url").value;
     var add_again = document.querySelector("#add-another").checked;
-    var description = document.querySelector(".description-area-entry").value;
+    var description = document.querySelector("#description").value
     var created = document.querySelector("#created").value;
     var updated = document.querySelector("#updated").value;
 
@@ -67,7 +71,8 @@ async function addProject() {
         if (add_again == true) {
             document.querySelector("#title").value = "";
             document.querySelector("#url").value = "";
-            document.querySelector("#description-area").value = "";
+            document.querySelector("#description").value = ""
+            showWriteTab()
         }
         else {
             window.location.replace("/admin-dashboard")
@@ -124,7 +129,7 @@ async function editProject(id) {
 
     var title = document.querySelector("#title").value;
     var url = document.querySelector("#url").value;
-    var description = document.querySelector(".description-area-entry").value;
+    var description = document.querySelector("#description").value
     var created = document.querySelector("#created").value;
     var updated = document.querySelector("#updated").value;
 

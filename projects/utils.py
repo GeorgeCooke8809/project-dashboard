@@ -2,6 +2,31 @@ from projects.models import Project
 import logging
 from datetime import datetime
 from projects.db import with_session
+import markdown
+from pygments.formatters import HtmlFormatter
+
+class LabelledFormatter(HtmlFormatter):
+    """Turns a highlighted code block into HTML, and records which language the code block is written in.
+
+    Used by render_markdown for every code block. It works the same as Pygments' normal HtmlFormatter, except it wraps
+    the code in <pre><code data-language="..."> so the details page can show the language above the block.
+
+    Args:
+        lang_str (str, optional): The language written after the ``` (e.g. python, ps1). Defaults to "".
+        **options: Any other Pygments settings, passed straight on to HtmlFormatter.
+    """
+
+    def __init__(self, lang_str: str = "", **options):
+        super().__init__(**options)
+        self.lang_str = lang_str
+
+    def wrap(self, source):
+        yield 0, f"<pre><code data-language=\"{self.lang_str}\">"
+
+        for line in source:
+            yield line
+
+        yield 0, "</code></pre>"
 
 @with_session
 def check_project_exists(Session, project_id: int) -> bool:
@@ -95,7 +120,7 @@ def get_project_details(Session, project_id: int) -> dict:
         ValueError: Raised if project does not exist
 
     Returns:
-        dict: id, name: str, url: str, description: str, created: datetime, created_readable: str
+        dict: id, name: str, url: str, description: str, description_html: str, created: datetime, created_readable: str
     """
     project: Project = Session.get(Project, project_id)
 
@@ -108,6 +133,7 @@ def get_project_details(Session, project_id: int) -> dict:
         "name": project.name,
         "url": project.url,
         "description": project.description,
+        "description_html": render_markdown(project.description),
         "created": project.datetime_created,
         "created_readable": project.datetime_created.strftime("%d.%m.%Y"),
         "updated": project.datetime_updated,
@@ -132,3 +158,9 @@ def get_inactive_projects(Session) -> list[dict]:
         })
 
     return project_dicts
+
+def render_markdown(text: str):
+    if text == "" or text is None:
+        return ""
+
+    return markdown.markdown(text, extensions=["fenced_code", "tables", "codehilite", "nl2br", "sane_lists"], extension_configs={"codehilite": {"css_class": "highlight", "guess_lang": False, "pygments_formatter": LabelledFormatter, "lang_prefix": ""}}) # New syntax: markdown.markdown(text) - turns Markdown text into HTML
