@@ -535,3 +535,21 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         grid-template-columns: 1fr;
     }
 }
+
+/* * Classical touches - remove class="classical" from <body> in base.html to turn these off */
+.classical #navigation-bar {
+    border-bottom: 3px double var(--accent-colour);
+}
+
+.classical .field label, .classical .meta-label, .classical .code-header span {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 12px;
+}
+
+.classical .markdown blockquote {
+    font-family: var(--heading-font);
+    font-style: italic;
+    font-size: 20px;
+    line-height: 1.5;
+}
