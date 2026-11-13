@@ -44,7 +44,7 @@ function decorateCodeBlocks(container) { // Adds a header with the language and 
         let header = document.createElement("div")
         header.className = "code-header"
 
-        let language = code.getAttribute("data-language") // New syntax: .getAttribute(name) - gets the value of an HTML attribute, or null if the element doesn't have it
+        let language = code.getAttribute("data-language")
 
         if (language == null) { // Blocks from before the language label was added
             language = "text"
@@ -73,12 +73,12 @@ function decorateCodeBlocks(container) { // Adds a header with the language and 
         }
 
         header.appendChild(copy_button)
-        code_block.prepend(header) // New syntax: .prepend(element) - adds the element as the first thing inside code_block, so the header goes above the code
+        code_block.prepend(header)
     }
 }
 
 async function copyCode(copy_button, code) { // Copies the code to the clipboard and shows a tick for 1.5 seconds
-    await navigator.clipboard.writeText(code.textContent) // New syntax: navigator.clipboard.writeText(text) - copies the text to the clipboard
+    await navigator.clipboard.writeText(code.textContent)
 
     copy_button.innerHTML = tick_icon
     copy_button.classList.add("copied")
