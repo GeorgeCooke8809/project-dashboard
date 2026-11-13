@@ -3,16 +3,24 @@ import logging
 from datetime import datetime
 from projects.db import with_session
 import markdown
-from pygments.formatters import HtmlFormatter # New syntax: pygments HtmlFormatter - the class Pygments uses to turn highlighted code into HTML, so a code block's HTML can be changed by making a class that inherits from it
+from pygments.formatters import HtmlFormatter
 
 class LabelledFormatter(HtmlFormatter):
-    """Pygments formatter that keeps the code block's language in a data-language attribute"""
+    """Turns a highlighted code block into HTML, and records which language the code block is written in.
+
+    Used by render_markdown for every code block. It works the same as Pygments' normal HtmlFormatter, except it wraps
+    the code in <pre><code data-language="..."> so the details page can show the language above the block.
+
+    Args:
+        lang_str (str, optional): The language written after the ``` (e.g. python, ps1). Defaults to "".
+        **options: Any other Pygments settings, passed straight on to HtmlFormatter.
+    """
 
     def __init__(self, lang_str: str = "", **options):
         super().__init__(**options)
         self.lang_str = lang_str
 
-    def wrap(self, source): # New syntax: overriding wrap() - Pygments calls this with the highlighted lines and uses whatever it yields as the block's HTML, so this adds the <pre><code> around them
+    def wrap(self, source):
         yield 0, f"<pre><code data-language=\"{self.lang_str}\">"
 
         for line in source:
