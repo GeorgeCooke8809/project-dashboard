@@ -1,30 +1,55 @@
 {% extends 'base.html' %}
 
 {% block scripts %}
-
+<script defer src="{{ url_for('static', filename='js/details.js') }}"></script>
+<script defer src="{{ url_for('static', filename='js/editor.js') }}"></script>
 {% endblock %}
 
 {% block content %}
-<form class="inline" id="create-project-form" onsubmit="editProject('{{ details['id'] }}')">
-    <div id="details-entry-panel">
-        <h4>Name</h4>
-        <input id="title" type="text" class="create-project-text" value="{{ details['name'] }}">
 
-        <h4>URL</h4>
-        <input id="url" type="text" class="create-project-text" value="{{ details['url'] }}">
+<a class="link" href="/admin-dashboard">← Admin dashboard</a>
+<h1 class="form-heading">Edit Project</h1>
 
-        <h4>Created</h4>
-        <input id="created" type="date" value="{{ created }}">
+<form id="project-form" onsubmit="editProject('{{ details['id'] }}')">
+    <div id="project-form-fields" class="card">
+        <div class="field">
+            <label for="title">Name</label>
+            <input id="title" type="text" value="{{ details['name'] }}">
+        </div>
 
-        <h4>Updated</h4>
-        <input id="updated" type="date" value="{{ updated }}">
+        <div class="field">
+            <label for="url">URL</label>
+            <input id="url" type="text" value="{{ details['url'] }}">
+        </div>
 
-        <input type="submit" class="cta-button" value="Edit Project" id="edit-project-button">
+        <div class="field">
+            <label for="created">Created</label>
+            <input id="created" type="date" value="{{ created }}">
+        </div>
+
+        <div class="field">
+            <label for="updated">Updated</label>
+            <input id="updated" type="date" value="{{ updated }}">
+        </div>
+
+        <button type="submit" class="cta-button form-submit-button" id="edit-project-button">Edit Project</button>
     </div>
 
-    <div class="fill-width">
-        <h4>Description</h4>
-        <textarea class="description-area-entry">{{ details['description'] }}</textarea>
+    <div id="project-form-editor" class="card">
+        <div class="editor-toolbar">
+            <div role="tablist" aria-label="Description editor">
+                <button type="button" role="tab" id="write-tab" class="editor-tab editor-tab-active" aria-selected="true" onclick="showWriteTab()">Write</button>
+                <button type="button" role="tab" id="preview-tab" class="editor-tab" aria-selected="false" onclick="showPreviewTab()">Preview</button>
+            </div>
+
+            <span class="editor-hint editor-hint-mouse">Markdown · right-click to insert</span>
+            <span class="editor-hint editor-hint-touch">Markdown · long-press to insert</span>
+        </div>
+
+        <label for="description" class="editor-label">Description</label>
+        <textarea id="description" class="editor-area" onkeydown="editorKeyDown()" oncontextmenu="openEditorMenu()">{% if details['description'] != None %}{{ details['description'] }}{% endif %}</textarea>
+
+        <div id="editor-preview" class="markdown editor-hidden"></div>
     </div>
 </form>
 

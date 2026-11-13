@@ -835,8 +835,214 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 /* * Project form */
 
+.form-heading {
+    margin-bottom: 24px;
+
+    font-size: 48px;
+}
+
+#project-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 24px;
+}
+
+#project-form-fields {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 260px;
+    max-width: 320px;
+}
+
+#project-form-editor {
+    display: flex;
+    flex-direction: column;
+    flex: 999 1 420px;
+    min-width: 0px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    margin-bottom: 18px;
+
+    font-size: 15px;
+    color: var(--heading-text-colour);
+
+    cursor: pointer;
+}
+
+.checkbox-label input {
+    width: 18px;
+    height: 18px;
+    margin: 0px;
+
+    accent-color: var(--accent-colour);
+}
+
+.form-submit-button {
+    width: 100%;
+    margin-top: auto;
+}
 
 /* * Markdown editor */
+
+#project-form-editor {
+    padding-top: 8px;
+}
+
+.editor-toolbar {
+    border-bottom: 1px solid var(--border-colour);
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.editor-tab {
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+
+    min-height: 44px;
+    padding: 0px 16px;
+
+    font-family: var(--body-font);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--muted-text-colour);
+
+    cursor: pointer;
+}
+
+.editor-tab:hover {
+    color: var(--heading-text-colour);
+}
+
+.editor-tab-active {
+    border-bottom-color: var(--accent-colour);
+
+    color: var(--heading-text-colour);
+}
+
+.editor-hint {
+    font-size: 13px;
+    color: var(--muted-text-colour);
+}
+
+.editor-hint-touch {
+    display: none;
+}
+
+@media (pointer: coarse) {
+    .editor-hint-mouse {
+        display: none;
+    }
+
+    .editor-hint-touch {
+        display: inline;
+    }
+}
+
+.editor-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+}
+
+.editor-area {
+    min-height: 440px;
+    padding: 14px 16px;
+
+    font-family: var(--code-font);
+    font-size: 15px;
+    line-height: 1.65;
+    tab-size: 4;
+
+    resize: vertical;
+}
+
+#editor-preview {
+    min-height: 440px;
+}
+
+#editor-menu-cover {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    z-index: 30;
+}
+
+#editor-menu {
+    background-color: var(--card-background-colour);
+    border: 1px solid var(--strong-border-colour);
+    border-radius: var(--card-border-radius);
+    box-shadow: 0px 10px 30px var(--page-background-colour);
+
+    position: fixed;
+    z-index: 31;
+
+    box-sizing: border-box;
+    width: 240px;
+    max-height: calc(100vh - 16px);
+    padding: 6px;
+    overflow-y: auto;
+}
+
+.editor-menu-item {
+    background-color: transparent;
+    border: none;
+    border-radius: var(--control-border-radius);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 44px;
+    padding: 0px 10px;
+
+    font-family: var(--body-font);
+    font-size: 15px;
+    color: var(--heading-text-colour);
+    text-align: left;
+
+    cursor: pointer;
+}
+
+.editor-menu-item:hover, .editor-menu-item:focus-visible {
+    background-color: var(--input-background-colour);
+}
+
+.editor-menu-item:focus-visible {
+    outline-offset: -2px;
+}
+
+.editor-menu-hint {
+    font-family: var(--code-font);
+    font-size: 13px;
+    color: var(--muted-text-colour);
+}
+
+.editor-menu-divider {
+    background-color: var(--border-colour);
+
+    height: 1px;
+    margin: 5px 4px;
+}
+
+.editor-hidden {
+    display: none;
+}
 
 /* ! Phone layout */
 
@@ -894,6 +1100,20 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     .markdown table {
         display: block;
         overflow-x: auto;
+    }
+
+    /* Project form */
+    .form-heading {
+        font-size: 40px;
+    }
+
+    #project-form-fields {
+        max-width: none;
+    }
+
+    /* Markdown editor */
+    .editor-area, #editor-preview {
+        min-height: 170px;
     }
 }
 
