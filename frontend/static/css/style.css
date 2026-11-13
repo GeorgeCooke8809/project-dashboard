@@ -366,10 +366,13 @@ button.ai-rating-box:focus-visible {
     border-color: var(--ai-level-5-colour);
 }
 
-.ai-rating-name {
-    margin: 8px 0px 0px 0px;
+.ai-rating-scale {
+    display: flex;
+    justify-content: space-between;
+    width: 232px; /* The width of the 5 boxes and the gaps between them */
+    margin-top: 6px;
 
-    font-size: 14px;
+    font-size: 13px;
     color: var(--muted-text-colour);
 }
 

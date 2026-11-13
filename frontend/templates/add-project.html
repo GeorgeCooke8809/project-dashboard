@@ -45,8 +45,10 @@
                 <button type="button" class="ai-rating-box ai-rating-level-{{ level }}" aria-label="{{ level }} out of 5" onclick="setAiCollaboration({{ level }})"></button>
                 {% endfor %}
             </div>
-
-            <p id="ai-rating-name" class="ai-rating-name"></p>
+            <div class="ai-rating-scale">
+                <span>No AI</span>
+                <span>Vibe coded</span>
+            </div>
         </div>
 
         <label class="checkbox-label">
