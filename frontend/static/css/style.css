@@ -497,6 +497,58 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 /* * Project form */
 
+.form-heading {
+    margin-bottom: 24px;
+
+    font-size: 48px;
+}
+
+#project-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 24px;
+}
+
+#project-form-fields {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 260px;
+    max-width: 320px;
+}
+
+#project-form-editor {
+    display: flex;
+    flex-direction: column;
+    flex: 999 1 420px;
+    min-width: 0px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    margin-bottom: 18px;
+
+    font-size: 15px;
+    color: var(--heading-text-colour);
+
+    cursor: pointer;
+}
+
+.checkbox-label input {
+    width: 18px;
+    height: 18px;
+    margin: 0px;
+
+    accent-color: var(--accent-colour);
+}
+
+.form-submit-button {
+    width: 100%;
+    margin-top: auto;
+}
 
 /* * Markdown editor */
 
@@ -533,6 +585,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
     #projects-group {
         grid-template-columns: 1fr;
+    }
+
+    /* Project form */
+    .form-heading {
+        font-size: 40px;
+    }
+
+    #project-form-fields {
+        max-width: none;
     }
 }
 
