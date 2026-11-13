@@ -174,14 +174,6 @@ function setTodays() {
 
 // ! AI collaboration rating
 
-const ai_collaboration_names = ["No AI", "A little AI help", "Some AI help", "Half AI", "Mostly AI", "Vibe coded"]
-
-function showAiCollaborationName() { // Shows the name of the current rating under the boxes
-    let rating = document.querySelectorAll("#ai-rating .ai-rating-filled").length // The rating is the number of filled in boxes
-
-    document.querySelector("#ai-rating-name").textContent = `${rating}/5 · ${ai_collaboration_names[rating]}`
-}
-
 function setAiCollaboration(rating) { // Fills in the boxes up to the one clicked, or clears them all if the current rating is clicked again
     let current_rating = document.querySelectorAll("#ai-rating .ai-rating-filled").length
 
@@ -198,10 +190,4 @@ function setAiCollaboration(rating) { // Fills in the boxes up to the one clicke
             boxes[i].classList.remove("ai-rating-filled")
         }
     }
-
-    showAiCollaborationName()
-}
-
-if (document.querySelector("#ai-rating") !== null) { // Only on pages that show the rating
-    showAiCollaborationName()
 }
