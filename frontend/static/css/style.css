@@ -114,24 +114,6 @@ h1 {
     list-style: none;
 }
 
-.basic-button {
-    all: unset;
-    background-color: var(--card-background-colour);
-    border: var(--card-hover-background-colour) 2px solid;
-    padding: 5px 5px;
-    font-family: var(--body-font);
-
-    cursor: pointer;
-    font-weight: lighter;
-
-    text-align: center;
-}
-
-.basic-button:hover {
-    background-color: var(--card-hover-background-colour);
-    border-color: var(--muted-text-colour);
-}
-
 #flash-container {
     position: fixed;
     top: 0px;
@@ -331,43 +313,6 @@ hr {
     padding: 5px;
 }
 
-.cta-button {
-    all: unset;
-    background-color: var(--accent-colour);
-    color: var(--card-background-colour);
-    font-family: var(--body-font);
-    font-size: 40px;
-    font-weight: bolder;
-    cursor: pointer;
-    text-align: center;
-    padding: 10px 20px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.cta-button:hover {
-    background-color: var(--accent-hover-colour);
-}
-
-#login-button {
-    margin-top: 20px;
-}
-
-.link {
-    all: unset;
-    cursor: pointer;
-    color: var(--muted-text-colour);
-    font-style: italic;
-    font-family: var(--body-font);
-    font-size: 15px;
-
-    margin: 5px 0px;
-}
-
-.right-align {
-    text-align: right;
-}
-
 #details-entry-panel {
     display: flex;
     box-sizing: border-box;
@@ -472,19 +417,144 @@ hr {
     margin-bottom: 2px;
 }
 
-input[type="date"] {
-    background-color: var(--card-hover-background-colour);
-    color: var(--heading-text-colour);
-    border: var(--muted-text-colour) solid;
-    border-width: 0px 0px 2px 0px;
-    border-radius: var(--card-border-radius);
-    padding: 5px 10px;
+/* * Buttons */
+
+.basic-button {
+    background-color: var(--card-background-colour);
+    border: 1px solid var(--strong-border-colour);
+    border-radius: var(--control-border-radius);
+
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0px 18px;
+
     font-family: var(--body-font);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--heading-text-colour);
+    text-decoration: none;
+
+    cursor: pointer;
 }
 
-::-webkit-calendar-picker-indicator {
-    background-color: var(--muted-text-colour);
+.basic-button:hover {
+    background-color: var(--card-hover-background-colour);
+    border-color: var(--accent-colour);
+}
+
+.cta-button {
+    background-color: var(--accent-colour);
+    border: 1px solid var(--accent-colour);
+    border-radius: var(--control-border-radius);
+
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0px 22px;
+
+    font-family: var(--body-font);
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text-on-accent-colour);
+    text-decoration: none;
+
     cursor: pointer;
-    border-radius: 3px;
-    padding: 4px;
+}
+
+.cta-button:hover {
+    background-color: var(--accent-hover-colour);
+    border-color: var(--accent-hover-colour);
+}
+
+a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent-colour);
+    outline-offset: 2px;
+}
+
+/* * Links */
+
+.link {
+    color: var(--muted-text-colour);
+    font-family: var(--body-font);
+    font-size: 15px;
+    text-decoration: none;
+}
+
+.link:hover {
+    color: var(--heading-text-colour);
+}
+
+.right-align {
+    text-align: right;
+}
+
+.muted-text {
+    color: var(--muted-text-colour);
+}
+
+/* * Cards */
+
+.card {
+    background-color: var(--card-background-colour);
+    border: 1px solid var(--border-colour);
+    border-radius: var(--card-border-radius);
+
+    box-sizing: border-box;
+    padding: 24px;
+}
+
+.clickable-card:hover {
+    background-color: var(--card-hover-background-colour);
+    border-color: var(--accent-colour);
+}
+
+/* * Form fields */
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    margin-bottom: 18px;
+}
+
+.field label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--label-text-colour);
+}
+
+input[type="text"], input[type="password"], input[type="date"], textarea {
+    background-color: var(--input-background-colour);
+    border: 1px solid var(--strong-border-colour);
+    border-radius: var(--control-border-radius);
+
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+
+    font-family: var(--body-font);
+    font-size: 16px;
+    color: var(--heading-text-colour);
+}
+
+input:focus, textarea:focus {
+    outline: 2px solid var(--accent-colour);
+    outline-offset: 1px;
+}
+
+input[type="date"] {
+    font-variant-numeric: tabular-nums;
+    color-scheme: dark;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(.75);
+    cursor: pointer;
 }
