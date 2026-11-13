@@ -1,23 +1,49 @@
 :root {
-    --primary-bg-colour: #1E1C1C;
-    --card-bg-colour: #212121;
-    --text-colour: #F2F0EF;
-    --contrast-colour: #A68521;
-    --contrast-colour-hover: #9c7c1d;
-    --hover-colour: #2B2E30;
+    --page-background-colour: #141312;
+    --card-background-colour: #1C1B19;
+    --card-hover-background-colour: #22211F;
+    --input-background-colour: #252421;
+    --border-colour: #312F2B;
+    --strong-border-colour: #47443F;
 
-    --serif-font: 'Cormorant Garamond', serif;
-    --sans-serif-font: 'Jost', sans-serif;
+    --heading-text-colour: #F3EDE0;
+    --body-text-colour: #DAD3C5;
+    --label-text-colour: #BCB4A5;
+    --muted-text-colour: #9C958A;
 
-    --link-card-border-radius: 0.4rem;
+    --accent-colour: #CDA349;
+    --accent-hover-colour: #B48D36;
+    --text-on-accent-colour: #141312;
 
-    --hyperlink-colour: #8d8d8d;
+    --error-colour: #D9675F;
+    --error-background-colour: #38201E;
+
+    --scrollbar-colour: #47443F;
+    --scrollbar-hover-colour: #5E5A54;
+
+    --code-background-colour: #202020;
+    --code-text-colour: #DAD3C5;
+    --code-keyword-colour: #D8B358;
+    --code-string-colour: #AAC48C;
+    --code-comment-colour: #948E86;
+    --code-number-colour: #E39C74;
+    --code-function-colour: #8EB0D6;
+    --code-type-colour: #C4A2D6;
+    --code-variable-colour: #86C2B2;
+    --code-tag-colour: #DE8A80;
+
+    --heading-font: 'Cormorant Garamond', serif;
+    --body-font: 'Jost', sans-serif;
+    --code-font: Consolas, 'Courier New', monospace;
+
+    --card-border-radius: 8px;
+    --control-border-radius: 6px;
 }
 
 #navigation-bar {
     padding: 5px 10px;
-    background-color: var(--card-bg-colour);
-    border: var(--contrast-colour) solid;
+    background-color: var(--card-background-colour);
+    border: var(--accent-colour) solid;
     border-width: 0px 0px 2px 0px;
     position: absolute;
     width: 100%;
@@ -36,9 +62,9 @@
 
     justify-content: space-between;
 
-    font-family: var(--sans-serif-font);
+    font-family: var(--body-font);
     font-size: 20px;
-    color: var(--text-colour);
+    color: var(--heading-text-colour);
 }
 
 #navigation-bar li {
@@ -69,10 +95,10 @@
 
 .basic-button {
     all: unset;
-    background-color: var(--card-bg-colour);
-    border: var(--hover-colour) 2px solid;
+    background-color: var(--card-background-colour);
+    border: var(--card-hover-background-colour) 2px solid;
     padding: 5px 5px;
-    font-family: var(--sans-serif-font);
+    font-family: var(--body-font);
 
     cursor: pointer;
     font-weight: lighter;
@@ -81,8 +107,8 @@
 }
 
 .basic-button:hover {
-    background-color: var(--hover-colour);
-    border-color: var(--hyperlink-colour);
+    background-color: var(--card-hover-background-colour);
+    border-color: var(--muted-text-colour);
 }
 
 #flash-container {
@@ -94,7 +120,7 @@
 .flash-message {
     display: flex;
     align-items: center;
-    font-family: var(--sans-serif-font);
+    font-family: var(--body-font);
 
     border-left-style: solid;
     border-left-color: #872c2c;
@@ -109,19 +135,19 @@
     border-top-right-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
     background-color: #ce5555;
-    color: var(--text-colour);
+    color: var(--heading-text-colour);
 }
 
 body {
-    font-family: var(--serif-font);
-    background-color: var(--primary-bg-colour);
+    font-family: var(--heading-font);
+    background-color: var(--page-background-colour);
     width: 80vw;
     margin: 0px auto;
     padding: 75px 0px 20px 0px;
     display: flex;
     flex-direction: column;
 
-    color: var(--text-colour);
+    color: var(--heading-text-colour);
     min-height: 100vh;
     box-sizing: border-box;
 }
@@ -145,10 +171,10 @@ hr {
 }
 
 .project-card {
-    background-color: var(--card-bg-colour);
-    border-color: var(--contrast-colour);
+    background-color: var(--card-background-colour);
+    border-color: var(--accent-colour);
     border-width: 0.1rem;
-    border-radius: var(--link-card-border-radius);
+    border-radius: var(--card-border-radius);
     border-style: solid;
 
     width: 17.5rem;
@@ -165,11 +191,11 @@ hr {
 }
 
 .project-card:hover {
-    background-color: var(--hover-colour);
+    background-color: var(--card-hover-background-colour);
 }
 
 .project-name {
-    background-color: var(--hover-colour);
+    background-color: var(--card-hover-background-colour);
 
     width: 100%;
     height: 50%;
@@ -180,14 +206,14 @@ hr {
     justify-content: center;
 
     border-top-style: solid;
-    border-color: var(--contrast-colour);
+    border-color: var(--accent-colour);
     border-width: 0.1rem;
 
-    border-radius: 0rem 0rem var(--link-card-border-radius) var(--link-card-border-radius);
+    border-radius: 0rem 0rem var(--card-border-radius) var(--card-border-radius);
 
     font-size: 20px;
 
-    color: var(--text-colour);
+    color: var(--heading-text-colour);
     text-decoration: none;
 }
 
@@ -204,10 +230,10 @@ hr {
     align-items: center;
     justify-content: center;
 
-    border-radius: var(--link-card-border-radius) var(--link-card-border-radius) 0rem 0rem;
+    border-radius: var(--card-border-radius) var(--card-border-radius) 0rem 0rem;
 
-    color: var(--text-colour);
-    font-family: var(--sans-serif-font);
+    color: var(--heading-text-colour);
+    font-family: var(--body-font);
     font-weight: bold;
     font-size: 25px;
     text-decoration: none;
@@ -228,8 +254,8 @@ hr {
     flex-direction: column;
     width: 25%;
     height: calc(100vh - 95px);
-    background-color: var(--card-bg-colour);
-    border-color: var(--contrast-colour);
+    background-color: var(--card-background-colour);
+    border-color: var(--accent-colour);
     border-width: 0.1rem;
     border-style: solid;
 
@@ -241,8 +267,8 @@ hr {
 }
 
 #details-info-panel h4 {
-    color: var(--text-colour);
-    font-family: var(--serif-font);
+    color: var(--heading-text-colour);
+    font-family: var(--heading-font);
     font-weight: bolder;
     font-size: 25px;
     text-decoration: none;
@@ -250,8 +276,8 @@ hr {
 }
 
 #details-info-panel a {
-    color: var(--text-colour);
-    font-family: var(--sans-serif-font);
+    color: var(--heading-text-colour);
+    font-family: var(--body-font);
     font-weight: bold;
     font-size: 15px;
     text-decoration: none;
@@ -262,15 +288,15 @@ hr {
 }
 
 #details-description {
-    font-family: var(--sans-serif-font);
+    font-family: var(--body-font);
 }
 
 #login-window {
     display: flex;
     flex-direction: column;
-    font-family: var(--sans-serif-font);
-    background-color: var(--card-bg-colour);
-    border: var(--contrast-colour) 1px solid;
+    font-family: var(--body-font);
+    background-color: var(--card-background-colour);
+    border: var(--accent-colour) 1px solid;
     padding: 20px;
     margin: auto;
 
@@ -289,20 +315,20 @@ hr {
 }
 
 #login-window input {
-    background-color: var(--hover-colour);
+    background-color: var(--card-hover-background-colour);
     border-color: #777777;
     border-width: 0px 0px 3px 0px;
     border-radius: 0.3rem 0.3rem 0.6rem 0.6rem;
     font-size: 20px;
-    color: var(--text-colour);
+    color: var(--heading-text-colour);
     padding: 5px;
 }
 
 .cta-button {
     all: unset;
-    background-color: var(--contrast-colour);
-    color: var(--card-bg-colour);
-    font-family: var(--sans-serif-font);
+    background-color: var(--accent-colour);
+    color: var(--card-background-colour);
+    font-family: var(--body-font);
     font-size: 40px;
     font-weight: bolder;
     cursor: pointer;
@@ -313,7 +339,7 @@ hr {
 }
 
 .cta-button:hover {
-    background-color: var(--contrast-colour-hover);
+    background-color: var(--accent-hover-colour);
 }
 
 #login-button {
@@ -323,9 +349,9 @@ hr {
 .link {
     all: unset;
     cursor: pointer;
-    color: var(--hyperlink-colour);
+    color: var(--muted-text-colour);
     font-style: italic;
-    font-family: var(--sans-serif-font);
+    font-family: var(--body-font);
     font-size: 15px;
 
     margin: 5px 0px;
@@ -341,11 +367,11 @@ hr {
     flex-direction: column;
     width: 25%;
     height: calc(100vh - 95px);
-    background-color: var(--card-bg-colour);
-    border-color: var(--contrast-colour);
+    background-color: var(--card-background-colour);
+    border-color: var(--accent-colour);
     border-width: 0.1rem;
     border-style: solid;
-    font-family: var(--sans-serif-font);
+    font-family: var(--body-font);
 
     padding: 10px 20px;
     margin-right: 20px;
@@ -357,14 +383,14 @@ hr {
     resize: none;
     width: 100%;
     height: calc(100% - 56px);
-    background-color: var(--hover-colour);
+    background-color: var(--card-hover-background-colour);
     box-sizing: border-box;
 
-    border: var(--hyperlink-colour) 2px solid;
+    border: var(--muted-text-colour) 2px solid;
     padding: 5px;
-    color: var(--text-colour);
+    color: var(--heading-text-colour);
     font-size: 12px;
-    font-family: var(--sans-serif-font);
+    font-family: var(--body-font);
 }
 
 .fill-width {
@@ -372,31 +398,31 @@ hr {
 }
 
 #create-project-form h4 {
-    font-family: var(--sans-serif-font);
+    font-family: var(--body-font);
     margin: 15px 0px 10px 0px;
     font-size: 27px;
     font-weight: normal;
 }
 
 .create-project-text {
-    background-color: var(--hover-colour);
-    border: var(--hyperlink-colour) solid;
+    background-color: var(--card-hover-background-colour);
+    border: var(--muted-text-colour) solid;
     border-width: 0px 0px 2px 0px;
     border-radius: 0.3rem 0.3rem 0.6rem 0.6rem;
     padding: 5px;
-    color: var(--text-colour);
+    color: var(--heading-text-colour);
     font-size: 15px;
 }
 
 #active-projects {
     text-align: center;
-    font-family: var(--sans-serif-font);
+    font-family: var(--body-font);
     margin-top: 10px;
 }
 
 #inactive-projects {
     text-align: center;
-    font-family: var(--sans-serif-font);
+    font-family: var(--body-font);
 }
 
 .project-row {
@@ -406,8 +432,8 @@ hr {
     height: 2rem;
     align-items: center;
     justify-content: space-between;
-    background-color: var(--card-bg-colour);
-    border-radius: var(--link-card-border-radius);
+    background-color: var(--card-background-colour);
+    border-radius: var(--card-border-radius);
 
     margin: 5px 0px;
     padding: 20px 5px 20px 10px;
@@ -416,7 +442,7 @@ hr {
 }
 
 .project-row:hover {
-    background-color: var(--hover-colour);
+    background-color: var(--card-hover-background-colour);
 }
 
 #edit-project-button {
@@ -428,9 +454,9 @@ hr {
 }
 
 .subtext {
-    color: var(--hyperlink-colour);
+    color: var(--muted-text-colour);
     font-style: italic;
-    font-family: var(--sans-serif-font);
+    font-family: var(--body-font);
     font-size: 15px;
 }
 
@@ -440,17 +466,17 @@ hr {
 }
 
 input[type="date"] {
-    background-color: var(--hover-colour);
-    color: var(--text-colour);
-    border: var(--hyperlink-colour) solid;
+    background-color: var(--card-hover-background-colour);
+    color: var(--heading-text-colour);
+    border: var(--muted-text-colour) solid;
     border-width: 0px 0px 2px 0px;
-    border-radius: var(--link-card-border-radius);
+    border-radius: var(--card-border-radius);
     padding: 5px 10px;
-    font-family: var(--sans-serif-font);
+    font-family: var(--body-font);
 }
 
 ::-webkit-calendar-picker-indicator {
-    background-color: var(--hyperlink-colour);
+    background-color: var(--muted-text-colour);
     cursor: pointer;
     border-radius: 3px;
     padding: 4px;
