@@ -36,6 +36,18 @@
             <p>{{ details["updated_readable"] }}</p>
             {% endif %}
         </div>
+
+        <div id="details-ai-collaboration">
+            <p class="meta-label">AI collaboration</p>
+
+            <div id="ai-rating" class="ai-rating" role="img" aria-label="AI collaboration {{ details['ai_collaboration'] }} out of 5">
+                {% for level in range(1, 6) %}
+                <span class="ai-rating-box ai-rating-level-{{ level }}{% if level <= details['ai_collaboration'] %} ai-rating-filled{% endif %}"></span>
+                {% endfor %}
+            </div>
+
+            <p id="ai-rating-name" class="ai-rating-name"></p>
+        </div>
     </div>
 
     <div id="details-description" class="card">
