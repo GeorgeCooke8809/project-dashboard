@@ -3,6 +3,7 @@ import projects
 import projects.db as db
 from projects.models import Project
 import time
+from datetime import datetime
 
 class TestActiveProjectsOverview:
     def test_active_projects_overview_single(self):
@@ -45,3 +46,13 @@ class TestActiveProjectsOverview:
             "name": "Project 2",
             "url": "URL 2"
         }]
+
+    def test_active_projects_overview_most_recently_updated_first(self):
+        projects.utils.add_project("Project 1", "URL 1", "Description 1", updated=datetime(2026, 1, 1))
+        projects.utils.add_project("Project 2", "URL 2", "Description 2", updated=datetime(2026, 6, 1))
+        projects.utils.add_project("Project 3", "URL 3", "Description 3", updated=datetime(2026, 3, 1))
+        overview = projects.utils.get_active_projects_overview()
+
+        assert overview[0]["name"] == "Project 2"
+        assert overview[1]["name"] == "Project 3"
+        assert overview[2]["name"] == "Project 1"
