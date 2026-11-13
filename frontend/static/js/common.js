@@ -49,7 +49,7 @@ async function addProject() {
     var title = document.querySelector("#title").value;
     var url = document.querySelector("#url").value;
     var add_again = document.querySelector("#add-another").checked;
-    var description = document.querySelector(".description-area-entry").value;
+    var description = document.querySelector("#description").value
     var created = document.querySelector("#created").value;
     var updated = document.querySelector("#updated").value;
 
@@ -128,7 +128,7 @@ async function editProject(id) {
 
     var title = document.querySelector("#title").value;
     var url = document.querySelector("#url").value;
-    var description = document.querySelector(".description-area-entry").value;
+    var description = document.querySelector("#description").value
     var created = document.querySelector("#created").value;
     var updated = document.querySelector("#updated").value;
 

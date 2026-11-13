@@ -5,31 +5,43 @@
 {% endblock %}
 
 {% block content %}
-<form class="inline" id="create-project-form" onsubmit="addProject()">
-    <div id="details-entry-panel">
-        <h4>Name</h4>
-        <input id="title" type="text" class="create-project-text">
 
-        <h4>URL</h4>
-        <input id="url" type="text" class="create-project-text">
+<a class="link" href="/admin-dashboard">← Admin dashboard</a>
+<h1 class="form-heading">New Project</h1>
 
-        <h4>Created</h4>
-        <input id="created" type="date" class="today">
-
-        <h4>Updated</h4>
-        <input id="updated" type="date" class="today">
-
-        <div class="inline">
-            <input id="add-another" name="add-another" type="checkbox">
-            <p>Add another project</p>
+<form id="project-form" onsubmit="addProject()">
+    <div id="project-form-fields" class="card">
+        <div class="field">
+            <label for="title">Name</label>
+            <input id="title" type="text">
         </div>
 
-        <input type="submit" class="cta-button" value="Add Project" id="add-project-button">
+        <div class="field">
+            <label for="url">URL</label>
+            <input id="url" type="text">
+        </div>
+
+        <div class="field">
+            <label for="created">Created</label>
+            <input id="created" type="date" class="today">
+        </div>
+
+        <div class="field">
+            <label for="updated">Updated</label>
+            <input id="updated" type="date" class="today">
+        </div>
+
+        <label class="checkbox-label">
+            <input id="add-another" name="add-another" type="checkbox">
+            Add another project
+        </label>
+
+        <button type="submit" class="cta-button form-submit-button" id="add-project-button">Add Project</button>
     </div>
 
-    <div class="fill-width">
-        <h4>Description</h4>
-        <textarea class="description-area-entry"></textarea>
+    <div id="project-form-editor" class="card">
+        <label for="description">Description</label>
+        <textarea id="description"></textarea>
     </div>
 </form>
 
