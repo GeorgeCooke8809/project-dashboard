@@ -1,27 +1,43 @@
 {% extends 'base.html' %}
 
 {% block scripts %}
-
+<script defer src="{{ url_for('static', filename='js/details.js') }}"></script>
 {% endblock %}
 
 {% block content %}
-<div class="inline">
-    <div id="details-info-panel">
-        <h4>{{ details["name"] }}</h4>
-        <a href="https://{{ details['url'] }}">{{ details['url'] }}</a>
+<a class="link" href="/">← All projects</a>
 
-        <div class="inline details-date">
-            <p class="subtext">Created: </p>
-            <p class="readable-date">{{ details["created_readable"] }}</p>
+<div id="details-columns">
+    <div id="details-info-panel" class="card">
+        <h1 id="details-name">{{ details["name"] }}</h1>
+
+        <div class="details-links">
+            {% if details["url"] %}
+            <a class="details-link" href="https://{{ details['url'] }}" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
+                {{ details['url'] }}
+            </a>
+            {% endif %}
         </div>
 
-        <div class="inline details-date">
-            <p class="subtext">Last Updated: </p>
-            <p class="readable-date">{{ details["updated_readable"] }}</p>
+        <div id="details-dates">
+            <p class="meta-label">Created</p>
+            <p>{{ details["created_readable"] }}</p>
+
+            {% if details["updated_readable"] %}
+            <p class="meta-label">Last updated</p>
+            <p>{{ details["updated_readable"] }}</p>
+            {% endif %}
         </div>
     </div>
 
-    <p id="details-description">{{ details["description"] }}</p>
+    <div id="details-description" class="card">
+        {% if details["description_html"] == "" %}
+        <p class="muted-text">No description</p>
+        {% endif %}
+
+        <div class="markdown">{{ details["description_html"] | safe }}</div> {# New syntax: | safe - puts the HTML on the page as real HTML instead of showing the tags as text #}
+    </div>
 </div>
 
 {% endblock %}
