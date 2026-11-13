@@ -114,39 +114,6 @@ h1 {
     list-style: none;
 }
 
-#login-window {
-    display: flex;
-    flex-direction: column;
-    font-family: var(--body-font);
-    background-color: var(--card-background-colour);
-    border: var(--accent-colour) 1px solid;
-    padding: 20px;
-    margin: auto;
-
-    width: 250px;
-}
-
-#login-window h2 {
-    font-size: 50px;
-    margin: 0px;
-    margin-bottom: 10px;
-}
-
-#login-window h3 {
-    margin: 15px 0px 5px 0px;
-    font-weight: normal;
-}
-
-#login-window input {
-    background-color: var(--card-hover-background-colour);
-    border-color: #777777;
-    border-width: 0px 0px 3px 0px;
-    border-radius: 0.3rem 0.3rem 0.6rem 0.6rem;
-    font-size: 20px;
-    color: var(--heading-text-colour);
-    padding: 5px;
-}
-
 /* * Buttons */
 
 .basic-button {
@@ -487,6 +454,35 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .bottom-link {
     margin-top: 12px;
+}
+
+
+/* * Login page */
+
+#login-window {
+    display: flex;
+    flex-direction: column;
+    max-width: 360px;
+    margin: 40px auto 0px auto;
+}
+
+#login-window h1 {
+    margin-bottom: 20px;
+
+    font-size: 44px;
+}
+
+#login-button {
+    width: 100%;
+    margin-top: 6px;
+}
+
+/* * 404 page */
+
+#not-found {
+    padding-top: 60px;
+
+    text-align: center;
 }
 
 
