@@ -71,7 +71,7 @@ async function addProject() {
         if (add_again == true) {
             document.querySelector("#title").value = "";
             document.querySelector("#url").value = "";
-            document.querySelector("#description-area").value = "";
+            document.querySelector("#description").value = ""
         }
         else {
             window.location.replace("/admin-dashboard")
