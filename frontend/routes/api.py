@@ -21,7 +21,7 @@ def add_project(): # TODO: Add validation to make sure that projects aren't crea
         })
     
     try:
-        utils.add_project(name = details["title"], url = details["url"], description = details["description"], updated = datetime.strptime(details["updated"], "%Y-%m-%d"), created = datetime.strptime(details["created"], "%Y-%m-%d"))
+        utils.add_project(name = details["title"], url = details["url"], description = details["description"], updated = datetime.strptime(details["updated"], "%Y-%m-%d"), created = datetime.strptime(details["created"], "%Y-%m-%d"), ai_collaboration=details["ai_collaboration"], github_link=details["github_link"])
         logging.info("Project successfully added")
         return jsonify({
             "code": 200,
@@ -111,7 +111,7 @@ def edit_project():
         })
     
     try:
-        utils.edit_project(project_id = details["id"], name = details["title"], url = details["url"], description = details["description"], created = details["created"], updated = details["updated"])
+        utils.edit_project(project_id = details["id"], name = details["title"], url = details["url"], description = details["description"], created = details["created"], updated = details["updated"], ai_collaboration=details["ai_collaboration"], github_link=details["github_link"])
         logging.info("Project successfully edited")
         return jsonify({
             "code": 200,

@@ -14,8 +14,8 @@ class Project(Base):
     datetime_created: Mapped[datetime] = mapped_column(nullable=False)
     datetime_updated: Mapped[datetime] = mapped_column(nullable=True)
     active: Mapped[bool] = mapped_column(nullable=False)
-    # TODO: Add AI collaboration grade
-    # TODO: Add GitHub link
+    ai_collaboration: Mapped[int] = mapped_column(nullable=False)
+    github_link: Mapped[str] = mapped_column(nullable=True)
     # ? favorite: Mapped[bool] = mapped_column(nullable=False)
     # ? datetime_accessed: Mapped[datetime] = mapped_column(nullable=True)
 

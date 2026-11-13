@@ -48,6 +48,7 @@ async function addProject() {
 
     var title = document.querySelector("#title").value;
     var url = document.querySelector("#url").value;
+    var github_link = document.querySelector("#github-link").value
     var add_again = document.querySelector("#add-another").checked;
     var description = document.querySelector("#description").value
     var created = document.querySelector("#created").value;
@@ -61,7 +62,9 @@ async function addProject() {
             "url": url,
             "description": description,
             "created": created,
-            "updated": updated
+            "updated": updated,
+            "ai_collaboration": ai_collaboration,
+            "github_link": github_link
         })
     })
 
@@ -71,6 +74,8 @@ async function addProject() {
         if (add_again == true) {
             document.querySelector("#title").value = "";
             document.querySelector("#url").value = "";
+            document.querySelector("#github-link").value = ""
+            setAiCollaboration(0)
             document.querySelector("#description").value = ""
             showWriteTab()
         }
@@ -129,6 +134,7 @@ async function editProject(id) {
 
     var title = document.querySelector("#title").value;
     var url = document.querySelector("#url").value;
+    var github_link = document.querySelector("#github-link").value
     var description = document.querySelector("#description").value
     var created = document.querySelector("#created").value;
     var updated = document.querySelector("#updated").value;
@@ -142,7 +148,9 @@ async function editProject(id) {
             "url": url,
             "description": description,
             "created": created,
-            "updated": updated
+            "updated": updated,
+            "ai_collaboration": ai_collaboration,
+            "github_link": github_link
         })
     })
 
@@ -160,4 +168,40 @@ async function editProject(id) {
 function setTodays() {
     let today = new Date().toISOString().substr(0, 10);
     document.querySelectorAll(".today").value = today;
+}
+
+// ! AI collaboration rating
+
+let ai_collaboration = 0
+
+function findAiCollaboration() { // Finds which box was selected when the page loaded (0 if none are)
+    let boxes = document.querySelectorAll("#ai-rating .ai-rating-box")
+
+    for (let i = 0; i < boxes.length; i++) {
+        if (boxes[i].className.includes("ai-rating-selected")) {
+            ai_collaboration = i + 1
+        }
+    }
+}
+
+function setAiCollaboration(rating) { // Selects the box clicked, or clears it back to 0 if it was already selected
+    if (rating == ai_collaboration) {
+        rating = 0
+    }
+
+    ai_collaboration = rating
+
+    let boxes = document.querySelectorAll("#ai-rating .ai-rating-box")
+
+    for (let i = 0; i < boxes.length; i++) {
+        if (i + 1 == rating) {
+            boxes[i].classList.add("ai-rating-selected")
+        } else {
+            boxes[i].classList.remove("ai-rating-selected")
+        }
+    }
+}
+
+if (document.querySelector("#ai-rating") !== null) { // Only on pages that show the rating
+    findAiCollaboration()
 }
