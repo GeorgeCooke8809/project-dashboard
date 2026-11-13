@@ -47,7 +47,7 @@
         </div>
 
         <label for="description" class="editor-label">Description</label>
-        <textarea id="description" class="editor-area" onkeydown="editorKeyDown()">{% if details['description'] != None %}{{ details['description'] }}{% endif %}</textarea>
+        <textarea id="description" class="editor-area" onkeydown="editorKeyDown()" oncontextmenu="openEditorMenu()">{% if details['description'] != None %}{{ details['description'] }}{% endif %}</textarea>
 
         <div id="editor-preview" class="markdown editor-hidden"></div>
     </div>

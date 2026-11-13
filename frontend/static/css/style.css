@@ -636,6 +636,72 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     min-height: 440px;
 }
 
+#editor-menu-cover {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    z-index: 30;
+}
+
+#editor-menu {
+    background-color: var(--card-background-colour);
+    border: 1px solid var(--strong-border-colour);
+    border-radius: var(--card-border-radius);
+    box-shadow: 0px 10px 30px var(--page-background-colour);
+
+    position: fixed;
+    z-index: 31;
+
+    box-sizing: border-box;
+    width: 240px;
+    max-height: calc(100vh - 16px);
+    padding: 6px;
+    overflow-y: auto;
+}
+
+.editor-menu-item {
+    background-color: transparent;
+    border: none;
+    border-radius: var(--control-border-radius);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 44px;
+    padding: 0px 10px;
+
+    font-family: var(--body-font);
+    font-size: 15px;
+    color: var(--heading-text-colour);
+    text-align: left;
+
+    cursor: pointer;
+}
+
+.editor-menu-item:hover, .editor-menu-item:focus-visible {
+    background-color: var(--input-background-colour);
+}
+
+.editor-menu-item:focus-visible {
+    outline-offset: -2px;
+}
+
+.editor-menu-hint {
+    font-family: var(--code-font);
+    font-size: 13px;
+    color: var(--muted-text-colour);
+}
+
+.editor-menu-divider {
+    background-color: var(--border-colour);
+
+    height: 1px;
+    margin: 5px 4px;
+}
+
 .editor-hidden {
     display: none;
 }

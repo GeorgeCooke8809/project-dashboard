@@ -5,6 +5,23 @@ const editor_closers = ["*", "_", "`", "\"", ")", "]"]
 const editor_doubles = ["*", "_", "`"] // Typing these again inside an empty pair doubles them (**|**)
 const word_characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
+const editor_menu_items = [
+    { "label": "Bold", "hint": "Ctrl+B", "action": () => wrapEditorSelection("**", "**", "bold text") },
+    { "label": "Italic", "hint": "Ctrl+I", "action": () => wrapEditorSelection("*", "*", "italic text") },
+    { "label": "Inline code", "hint": "`", "action": () => wrapEditorSelection("`", "`", "code") },
+    { "label": "Link", "hint": "[ ]( )", "action": () => wrapEditorSelection("[", "](https://)", "link text") },
+    { "divider": true },
+    { "label": "Heading", "hint": "##", "action": () => insertEditorLine("## ") },
+    { "label": "Bullet list", "hint": "-", "action": () => insertEditorLine("- ") },
+    { "label": "Numbered list", "hint": "1.", "action": () => insertEditorLine("1. ") },
+    { "label": "Checklist", "hint": "- [ ]", "action": () => insertEditorLine("- [ ] ") },
+    { "label": "Quote", "hint": ">", "action": () => insertEditorLine("> ") },
+    { "divider": true },
+    { "label": "Table", "hint": "", "action": () => insertEditorBlock("| Column 1 | Column 2 |\n| --- | --- |\n| ", "Cell", " |  |") },
+    { "label": "Code block", "hint": "```", "action": () => insertEditorBlock("```\n", "code", "\n```") },
+    { "label": "Horizontal line", "hint": "---", "action": () => insertEditorBlock("---\n", "", "") }
+]
+
 // Editing helpers
 
 function replaceEditorText(start, end, new_text) { // Replaces the description text between start and end in a way that Ctrl+Z can undo
@@ -156,6 +173,154 @@ function continueEditorList(text, start) { // Starts the next list item when Ent
     }
 }
 
+// Right-click menu
+
+function insertEditorLine(marker) { // Adds the marker (e.g. "## " or "- ") to the start of the current line
+    let area = document.querySelector("#description")
+    let start = area.selectionStart
+    let end = area.selectionEnd
+    let line_start = area.value.lastIndexOf("\n", start - 1) + 1 // New syntax: .lastIndexOf() - like .indexOf() but searches backwards from the cursor, so this finds where the current line starts
+
+    replaceEditorText(line_start, line_start, marker)
+    selectEditorText(start + marker.length, end + marker.length)
+}
+
+function insertEditorBlock(before, placeholder, after) { // Inserts a table, code block or line on its own lines, with a blank line above it so the Markdown works
+    let area = document.querySelector("#description")
+    let start = area.selectionStart
+    let end = area.selectionEnd
+    let line_start = area.value.lastIndexOf("\n", start - 1) + 1 // New syntax: .lastIndexOf() - like .indexOf() but searches backwards from the cursor, so this finds where the current line starts
+    let selected = area.value.substr(start, end - start)
+
+    if (selected == "") {
+        selected = placeholder
+    }
+
+    if (start > line_start) { // The cursor is part way through a line, so start a new paragraph
+        before = "\n\n" + before
+    }
+    else if (line_start > 1 && area.value.substr(line_start - 2, 1) !== "\n") { // The line above has text on it, so leave a blank line (New syntax: && and || - JavaScript's "and" and "or")
+        before = "\n" + before
+    }
+
+    replaceEditorText(start, end, before + selected + after)
+    selectEditorText(start + before.length, start + before.length + selected.length)
+}
+
+function createEditorMenu() { // Builds the right-click menu from editor_menu_items and adds it to the page
+    let cover = document.createElement("div")
+    cover.id = "editor-menu-cover"
+    cover.className = "editor-hidden"
+    cover.setAttribute("onclick", "closeEditorMenu()")
+
+    let menu = document.createElement("div")
+    menu.id = "editor-menu"
+    menu.className = "editor-hidden"
+    menu.setAttribute("role", "menu")
+    menu.setAttribute("aria-label", "Insert Markdown")
+    menu.setAttribute("onkeydown", "editorMenuKeyDown()")
+
+    for (let i = 0; i < editor_menu_items.length; i++) {
+        if (editor_menu_items[i].divider == true) {
+            let divider = document.createElement("div")
+            divider.className = "editor-menu-divider"
+            divider.setAttribute("role", "separator")
+            menu.appendChild(divider)
+        }
+        else {
+            let button = document.createElement("button")
+            button.type = "button"
+            button.className = "editor-menu-item"
+            button.setAttribute("role", "menuitem")
+            button.setAttribute("onclick", `runEditorMenuItem(${i})`)
+
+            let label = document.createElement("span")
+            label.textContent = editor_menu_items[i].label
+            button.appendChild(label)
+
+            let hint = document.createElement("span")
+            hint.className = "editor-menu-hint"
+            hint.textContent = editor_menu_items[i].hint
+            button.appendChild(hint)
+
+            menu.appendChild(button)
+        }
+    }
+
+    document.body.appendChild(cover)
+    document.body.appendChild(menu)
+}
+
+async function openEditorMenu() { // Opens the menu where the textarea was right-clicked (or long-pressed), kept inside the screen
+    event.preventDefault()
+
+    let menu = document.querySelector("#editor-menu")
+    let x = event.clientX
+    let y = event.clientY
+
+    document.querySelector("#editor-menu-cover").classList.remove("editor-hidden")
+    menu.classList.remove("editor-hidden")
+
+    if (x + menu.offsetWidth > window.innerWidth - 8) {
+        x = window.innerWidth - menu.offsetWidth - 8
+    }
+
+    if (y + menu.offsetHeight > window.innerHeight - 8) {
+        y = window.innerHeight - menu.offsetHeight - 8
+    }
+
+    if (x < 8) {
+        x = 8
+    }
+
+    if (y < 8) {
+        y = 8
+    }
+
+    menu.style.left = `${x}px`
+    menu.style.top = `${y}px`
+
+    document.querySelector(".editor-menu-item").focus() // New syntax: .focus() - moves the keyboard focus to the first item so the arrow keys work straight away
+}
+
+async function closeEditorMenu() { // Hides the menu
+    document.querySelector("#editor-menu-cover").classList.add("editor-hidden")
+    document.querySelector("#editor-menu").classList.add("editor-hidden")
+}
+
+async function runEditorMenuItem(index) { // Closes the menu and does what the picked item says
+    closeEditorMenu()
+    editor_menu_items[index].action() // New syntax: .action() - runs the arrow function saved under "action" in editor_menu_items for this item
+}
+
+async function editorMenuKeyDown() { // Moves between menu items with the arrow keys, and closes the menu with Escape or Tab
+    let items = document.querySelectorAll(".editor-menu-item")
+    let current = 0
+
+    for (let i = 0; i < items.length; i++) {
+        if (items[i] == document.activeElement) {
+            current = i
+        }
+    }
+
+    if (event.key == "ArrowDown") {
+        event.preventDefault()
+        items[(current + 1) % items.length].focus() // New syntax: .focus() - moves the keyboard focus to the next item (% wraps round to the first)
+    }
+    else if (event.key == "ArrowUp") {
+        event.preventDefault()
+        items[(current - 1 + items.length) % items.length].focus() // New syntax: .focus() - moves the keyboard focus to the item above (% wraps round to the last)
+    }
+    else if (event.key == "Escape") {
+        event.preventDefault()
+        closeEditorMenu()
+        document.querySelector("#description").focus() // New syntax: .focus() - puts the cursor back in the textarea
+    }
+    else if (event.key == "Tab") {
+        closeEditorMenu()
+    }
+}
+
 // Tabs
 
 async function showWriteTab() { // Shows the description textarea and hides the preview
@@ -209,3 +374,5 @@ async function showPreviewTab() { // Shows the description as it will look on th
         }
     }
 }
+
+createEditorMenu() // Builds the menu when the page loads (this file is loaded with defer, so the page is ready by now)
