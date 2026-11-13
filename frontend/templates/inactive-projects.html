@@ -6,17 +6,27 @@
 
 {% block content %}
 
-<h1>Inactive Projects</h1>
+<a class="link" href="./admin-dashboard">← Admin dashboard</a>
 
-<div id="inactive-projects">
+<div class="page-heading">
+    <h1>Inactive Projects</h1>
+</div>
+
+<div id="inactive-projects" class="card project-list">
     {% if inactive_projects == [] %}
-    <p>No inactive projects</p>
+    <p class="muted-text no-projects">No inactive projects</p>
     {% endif %}
 
     {% for project in inactive_projects %}
     <div class="project-row">
-        <p>{{ project["name"] }}</p>
-        <button class="basic-button" onclick="restoreProject('{{ project['id'] }}')">Restore</button>
+        <div>
+            <p class="project-row-name">{{ project["name"] }}</p>
+            <p class="project-row-url">{{ project["url"] }}</p>
+        </div>
+
+        <div class="project-row-buttons">
+            <button class="basic-button" onclick="restoreProject('{{ project['id'] }}')">Restore</button>
+        </div>
     </div>
     {% endfor %}
 </div>

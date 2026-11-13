@@ -6,20 +6,28 @@
 
 {% block content %}
 
-<h1>Admin Dashboard</h1>
-<h2>Active Projects</h2>
+<div class="page-heading">
+    <div>
+        <h1>Admin Dashboard</h1>
+        <p class="muted-text">Active projects</p>
+    </div>
 
-<a class="basic-button" href="./add-project">+ New Project</a>
+    <a class="cta-button" href="./add-project">+ New Project</a>
+</div>
 
-<div id="active-projects">
+<div id="active-projects" class="card project-list">
     {% if active_projects == [] %}
-    <p>No active projects</p>
+    <p class="muted-text no-projects">No active projects</p>
     {% endif %}
 
     {% for project in active_projects %}
     <div class="project-row">
-        <p>{{ project["name"] }}</p>
         <div>
+            <p class="project-row-name">{{ project["name"] }}</p>
+            <p class="project-row-url">{{ project["url"] }}</p>
+        </div>
+
+        <div class="project-row-buttons">
             <a class="basic-button" href="./edit-project/{{ project['id'] }}">Edit</a>
             <button class="basic-button" onclick="archiveProject('{{ project['id'] }}')">Archive</button>
         </div>
@@ -27,6 +35,8 @@
     {% endfor %}
 </div>
 
-<a class="link right-align" href="./inactive-projects">View Inactive Projects →</a>
+<div class="right-align">
+    <a class="link bottom-link" href="./inactive-projects">View inactive projects →</a>
+</div>
 
 {% endblock %}

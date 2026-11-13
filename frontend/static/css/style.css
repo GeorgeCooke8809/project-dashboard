@@ -147,37 +147,6 @@ h1 {
     padding: 5px;
 }
 
-#active-projects {
-    text-align: center;
-    font-family: var(--body-font);
-    margin-top: 10px;
-}
-
-#inactive-projects {
-    text-align: center;
-    font-family: var(--body-font);
-}
-
-.project-row {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 2rem;
-    align-items: center;
-    justify-content: space-between;
-    background-color: var(--card-background-colour);
-    border-radius: var(--card-border-radius);
-
-    margin: 5px 0px;
-    padding: 20px 5px 20px 10px;
-    box-sizing: border-box;
-    cursor: pointer;
-}
-
-.project-row:hover {
-    background-color: var(--card-hover-background-colour);
-}
-
 /* * Buttons */
 
 .basic-button {
@@ -240,6 +209,10 @@ a:focus-visible, button:focus-visible {
 /* * Links */
 
 .link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+
     color: var(--muted-text-colour);
     font-family: var(--body-font);
     font-size: 15px;
@@ -457,6 +430,63 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .view-details:hover {
     text-decoration: underline;
+}
+
+
+/* * Admin dashboard and inactive projects */
+
+.project-list {
+    padding: 0px;
+    overflow: hidden;
+}
+
+.no-projects {
+    margin: 0px;
+    padding: 20px;
+}
+
+.project-row {
+    border-bottom: 1px solid var(--border-colour);
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    padding: 14px 20px;
+}
+
+.project-row:last-child {
+    border-bottom: none;
+}
+
+.project-row:hover {
+    background-color: var(--card-hover-background-colour);
+}
+
+.project-row p {
+    margin: 0px;
+}
+
+.project-row-name {
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.project-row-url {
+    font-size: 13px;
+    color: var(--muted-text-colour);
+    overflow-wrap: anywhere;
+}
+
+.project-row-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.bottom-link {
+    margin-top: 12px;
 }
 
 
