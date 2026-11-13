@@ -317,15 +317,28 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .ai-rating-box {
-    background-color: transparent;
-    border: 2px solid var(--strong-border-colour);
+    background-color: var(--input-background-colour);
+    border: 1px solid var(--strong-border-colour);
     border-radius: var(--control-border-radius);
 
     box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 40px;
     height: 40px;
     margin: 0px;
     padding: 0px;
+
+    font-family: var(--body-font);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--muted-text-colour);
+}
+
+.ai-rating-box.ai-rating-selected {
+    font-weight: 600;
+    color: var(--text-on-accent-colour);
 }
 
 button.ai-rating-box {
@@ -341,27 +354,27 @@ button.ai-rating-box:focus-visible {
     outline-offset: 2px;
 }
 
-.ai-rating-level-1.ai-rating-filled {
+.ai-rating-level-1.ai-rating-selected {
     background-color: var(--ai-level-1-colour);
     border-color: var(--ai-level-1-colour);
 }
 
-.ai-rating-level-2.ai-rating-filled {
+.ai-rating-level-2.ai-rating-selected {
     background-color: var(--ai-level-2-colour);
     border-color: var(--ai-level-2-colour);
 }
 
-.ai-rating-level-3.ai-rating-filled {
+.ai-rating-level-3.ai-rating-selected {
     background-color: var(--ai-level-3-colour);
     border-color: var(--ai-level-3-colour);
 }
 
-.ai-rating-level-4.ai-rating-filled {
+.ai-rating-level-4.ai-rating-selected {
     background-color: var(--ai-level-4-colour);
     border-color: var(--ai-level-4-colour);
 }
 
-.ai-rating-level-5.ai-rating-filled {
+.ai-rating-level-5.ai-rating-selected {
     background-color: var(--ai-level-5-colour);
     border-color: var(--ai-level-5-colour);
 }
